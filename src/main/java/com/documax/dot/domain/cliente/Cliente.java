@@ -1,4 +1,5 @@
 package com.documax.dot.domain.cliente;
+import com.documax.dot.domain.dto.DatosRegistroCliente;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -14,8 +15,12 @@ import lombok.NoArgsConstructor;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private int identificacion;
+    private Long id;
+    private Long identificacion;
     private String nombre;
 
+    public Cliente(DatosRegistroCliente datosRegistroCliente) {
+        this.nombre=datosRegistroCliente.nombre();
+        this.identificacion=datosRegistroCliente.identificacion();
+    }
 }

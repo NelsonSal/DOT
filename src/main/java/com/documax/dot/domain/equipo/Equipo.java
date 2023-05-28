@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class Equipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String serial;
     @Enumerated(EnumType.STRING)
     private Marca marca;
