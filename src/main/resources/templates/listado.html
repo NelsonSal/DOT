@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado</title>
+</head>
+<body>
+<h2 align="center">LISTADO DE EQUIPOS</h2>
+    <div align="center">
+      <table border="1">
+          <thead>
+            <th>id</th>
+            <th>Serial</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Cliente</th>
+          </thead>
+          <tbody>
+            <tr th:each="equipo : ${ListaEquipos} ">
+                <td th:text="${equipo.id}"></td>
+                <td th:text="${equipo.serial}"></td>
+                <td th:text="${equipo.marca}"></td>
+                <td th:text="${equipo.modelo}"></td>
+                <td th:text="${equipo.cliente}"></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+</body>
+</html>
