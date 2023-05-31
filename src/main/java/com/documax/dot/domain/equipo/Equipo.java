@@ -21,7 +21,7 @@ public class Equipo {
     private Marca marca;
     @Enumerated(EnumType.STRING)
     private Modelo modelo;
-    @OneToOne
+    @ManyToOne
     private Cliente cliente;
 
     public Equipo() {

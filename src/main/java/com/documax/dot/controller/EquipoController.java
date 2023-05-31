@@ -49,7 +49,7 @@ public class EquipoController {
     public String guardarEquipo(@ModelAttribute ("equipo") DatosAgregarEquipo datosAgregarEquipo){
         System.out.println(datosAgregarEquipo);
         equipoRepository.save(new Equipo(datosAgregarEquipo));
-        return "listado";
+        return "redirect:/listadoEquipos";
     }
 
 }
