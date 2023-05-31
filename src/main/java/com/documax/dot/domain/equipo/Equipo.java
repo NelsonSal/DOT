@@ -1,6 +1,7 @@
 package com.documax.dot.domain.equipo;
 
 import com.documax.dot.domain.cliente.Cliente;
+import com.documax.dot.domain.dto.DatosAgregarEquipo;
 import com.documax.dot.domain.dto.DatosListadoEquipos;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,13 @@ public class Equipo {
 
     public Equipo() {
     }
+    public Equipo(DatosAgregarEquipo datosAgregarEquipo){
+        this.serial=datosAgregarEquipo.serial();
+        this.marca=datosAgregarEquipo.marca();
+        this.modelo=datosAgregarEquipo.modelo();
+        this.cliente=datosAgregarEquipo.cliente();
 
+    }
     public Equipo(Long id, String serial, Marca marca, Modelo modelo, Cliente cliente) {
         this.id = id;
         this.serial = serial;

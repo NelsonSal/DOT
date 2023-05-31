@@ -26,6 +26,10 @@ public class Cliente {
         this.nombre = nombre;
     }
 
+    public Cliente(Long id) {
+        this.id = id;
+    }
+
     public Cliente(DatosRegistroCliente datosRegistroCliente) {
         this.nombre=datosRegistroCliente.nombre();
         this.identificacion=datosRegistroCliente.identificacion();

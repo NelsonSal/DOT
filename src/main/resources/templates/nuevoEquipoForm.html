@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Equipo</title>
+</head>
+<body>
+<h1>Guardar Equipo</h1>
+
+ <form action="#" th:action="@{/guardarEquipo}" th:object="${equipo}" method="POST">
+    <input type="text" th:field="*{serial}" placeholder="Serial" >
+    <input type="text" th:field="*{marca}" placeholder="Marca" >
+    <input type="text" th:field="*{modelo}" placeholder="Modelo" >
+    <input type="text" th:field="*{cliente}" placeholder="Cliente" >
+     <button type="submit">Guardar equipo</button>
+</form>
+</body>
+</html>
