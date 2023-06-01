@@ -27,6 +27,7 @@ public class EventoController {
     @PostMapping("/guardarEvento")
     public String guardaNewEvento(@ModelAttribute("newEvento")DatosRegistroEvento datosRegistroEvento){
         System.out.println(datosRegistroEvento);
-        return "fin";
+        eventoRepository.save(new Evento(datosRegistroEvento));
+        return "newEventoForm";
     }
 }

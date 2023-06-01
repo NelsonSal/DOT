@@ -1,5 +1,6 @@
 package com.documax.dot.domain.evento;
 
+import com.documax.dot.domain.dto.DatosRegistroEvento;
 import com.documax.dot.domain.equipo.Equipo;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -31,6 +32,15 @@ public class Evento {
         this.contadorTotal = contadorTotal;
         this.tipoEvento = tipoEvento;
         this.detalle = detalle;
+    }
+
+    public Evento(DatosRegistroEvento datosRegistroEvento) {
+        //this.id = id;
+        this.equipo = datosRegistroEvento.equipo();
+        this.fechaEvento = datosRegistroEvento.fechaEvento();
+        this.contadorTotal = datosRegistroEvento.contadorTotal();
+        this.tipoEvento = datosRegistroEvento.tipoEvento();
+        this.detalle = datosRegistroEvento.detalle();
     }
 
     public Long getId() {
