@@ -6,9 +6,9 @@ import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 @Table(name="eventos")
-@Entity(name="evento")
+@Entity(name="Evento")
 @EqualsAndHashCode(of="id")
-public class evento {
+public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,15 +19,18 @@ public class evento {
 
     private Long tipoEvento; //1: Toma contadores 2: Otro
 
-    public evento() {
+    private String detalle;
+
+    public Evento() {
     }
 
-    public evento(Long id, Equipo equipo, Date fechaEvento, Long contadorTotal, Long tipoEvento) {
+    public Evento(Long id, Equipo equipo, Date fechaEvento, Long contadorTotal, Long tipoEvento, String detalle) {
         this.id = id;
         this.equipo = equipo;
         this.fechaEvento = fechaEvento;
         this.contadorTotal = contadorTotal;
         this.tipoEvento = tipoEvento;
+        this.detalle = detalle;
     }
 
     public Long getId() {
@@ -68,5 +71,13 @@ public class evento {
 
     public void setTipoEvento(Long tipoEvento) {
         this.tipoEvento = tipoEvento;
+    }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 }

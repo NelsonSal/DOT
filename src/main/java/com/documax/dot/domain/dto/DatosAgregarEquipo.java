@@ -8,9 +8,5 @@ import com.documax.dot.domain.equipo.Modelo;
 public record DatosAgregarEquipo(String serial,
                                  Marca marca,
                                  Modelo modelo,
-                                 Cliente cliente)
-{
-
-
-
+                                 Cliente cliente){
 }
