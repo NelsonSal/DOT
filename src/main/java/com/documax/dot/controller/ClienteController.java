@@ -6,14 +6,13 @@ import com.documax.dot.domain.dto.DatosRegistroCliente;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/clientes")
-//@RequiredArgsConstructor
+@Controller
 public class ClienteController {
 
 
@@ -23,7 +22,7 @@ public class ClienteController {
         this.clienteRepository = clienteRepository;
     }
 
-    @PostMapping
+    @PostMapping("/agregarCliente")
     public void registarMedico(@RequestBody @Valid DatosRegistroCliente datosRegistroCliente) {
         clienteRepository.save(new Cliente(datosRegistroCliente));
     }

@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>DOT inicio</title>
 </head>
 <body>
 
-<h1>PRUEBA CON THYMELEAF</h1>
-
+<h1>APLICACION DOT</h1>
+<div>
+    <div><a th:href="@{/listadoEquipos}">Listado de Equipos</a></div>
+    <div><a th:href="@{/agregarEquipo}">Agregar Equipo</a></div>
+    <div><a th:href="@{/agregarEvento}">Agregar Evento</a></div>
+</div>
 </body>
 </html>
