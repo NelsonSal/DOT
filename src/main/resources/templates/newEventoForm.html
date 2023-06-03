@@ -10,10 +10,11 @@
  <form action="#" th:action="@{/guardarEvento}" th:object="${newEvento}" method="POST">
     <input type="text" th:field="*{equipo}" placeholder="Equipo id" >
     <input type="text" th:field="*{fechaEvento}" placeholder="Fecha" >
-    <input type="number" th:field="*{contador}" placeholder="Contador" >
-    <input type="number" th:field="*{tipoEvento}" placeholder="Tipo Evento" >
+     <input type="number" th:field="*{contadorTotal}" placeholder="Contador" >
+     <input type="number" th:field="*{tipoEvento}" placeholder="Tipo Evento" >
      <input type="text" th:field="*{detalle}" placeholder="Detalle" >
      <button type="submit">Guardar Evento</button>
 </form>
 </body>
 </html>
+
