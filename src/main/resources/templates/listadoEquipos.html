@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Listado</title>
@@ -20,6 +20,7 @@
             <th>Marca</th>
             <th>Modelo</th>
             <th>Cliente</th>
+            <th>Accion</th>
           </thead>
           <tbody>
             <tr th:each="equipo : ${ListaEquipos} ">
@@ -28,6 +29,7 @@
                 <td th:text="${equipo.marca}"></td>
                 <td th:text="${equipo.modelo}"></td>
                 <td th:text="${equipo.cliente}"></td>
+                <td><a th:href="@{/buscarUltimaLectura/{id}(id=${equipo.id})}">TC</a></td>
             </tr>
           </tbody>
       </table>

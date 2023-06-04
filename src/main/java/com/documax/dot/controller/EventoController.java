@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.text.ParseException;
@@ -43,6 +44,15 @@ public class EventoController {
     public String listadoEventos(Model model){
         List<DatosListadoEventos> listaEventos= eventoRepository.findAll().stream().map(DatosListadoEventos::new).toList();
         model.addAttribute("listaEventos",listaEventos);
+        return "listaEventos";
+    }
+
+    @GetMapping("/buscarUltimaLectura/{id}")
+    public String  buscarUltimoContador(@PathVariable (value="id") Long equipo_id){
+        System.out.println("entró");
+        Evento evento;
+        evento = eventoRepository.findFirstByEquipo_idOrderByFechaEventoDesc(equipo_id);
+        System.out.println("Contador traido= "+evento.getContadorTotal()+" en la fecha= "+evento.getFechaEvento());
         return "listaEventos";
     }
 }

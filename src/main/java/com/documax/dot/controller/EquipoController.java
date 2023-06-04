@@ -37,7 +37,7 @@ public class EquipoController {
     public String verListadoEquipos(Model model){
         List<DatosListadoEquipos> list = equipoRepository.findAll().stream().map(DatosListadoEquipos::new).toList();
         model.addAttribute("ListaEquipos", list);
-        return "listado";
+        return "listadoEquipos";
     }
     @GetMapping("/agregarEquipo")
     public String mostrarFormaNuevoEquipo (Model model){
