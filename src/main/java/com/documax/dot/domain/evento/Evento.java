@@ -4,7 +4,11 @@ import com.documax.dot.domain.dto.DatosRegistroEvento;
 import com.documax.dot.domain.equipo.Equipo;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 @Table(name="eventos")
 @Entity(name="Evento")
@@ -15,6 +19,7 @@ public class Evento {
     private Long id;
     @ManyToOne
     private Equipo equipo;
+    @DateTimeFormat (pattern = "yyyy-MM-dd")
     private Date fechaEvento;
     private Long contadorTotal;
 
@@ -34,10 +39,19 @@ public class Evento {
         this.detalle = detalle;
     }
 
+//    public Evento(DatosRegistroEvento datosRegistroEvento) {
+//    }
+
     public Evento(DatosRegistroEvento datosRegistroEvento) {
         //this.id = id;
         this.equipo = datosRegistroEvento.equipo();
-        this.fechaEvento = datosRegistroEvento.fechaEvento();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            this.fechaEvento = (formatter.parse(datosRegistroEvento.fechaEvento()));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        //this.fechaEvento = datosRegistroEvento.fechaEvento();
         this.contadorTotal = datosRegistroEvento.contadorTotal();
         this.tipoEvento = datosRegistroEvento.tipoEvento();
         this.detalle = datosRegistroEvento.detalle();

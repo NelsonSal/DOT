@@ -1,6 +1,8 @@
 package com.documax.dot.controller;
 
 import com.documax.dot.domain.dto.DatosAgregarEquipo;
+import com.documax.dot.domain.dto.DatosListadoEquipos;
+import com.documax.dot.domain.dto.DatosListadoEventos;
 import com.documax.dot.domain.dto.DatosRegistroEvento;
 import com.documax.dot.domain.evento.Evento;
 import com.documax.dot.repository.EventoRepository;
@@ -10,6 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Controller
 public class EventoController {
@@ -25,9 +31,18 @@ public class EventoController {
     }
 
     @PostMapping("/guardarEvento")
-    public String guardaNewEvento(@ModelAttribute("newEvento")DatosRegistroEvento datosRegistroEvento){
-        System.out.println(datosRegistroEvento);
+    public String guardaNewEvento(@ModelAttribute("newEvento")DatosRegistroEvento datosRegistroEvento) throws ParseException {
+        System.out.println("fecha desde formulario= "+datosRegistroEvento.fechaEvento());
+        //SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
         eventoRepository.save(new Evento(datosRegistroEvento));
-        return "newEventoForm";
+        return "redirect:/listadoEventos";
+    }
+
+    @GetMapping("/listadoEventos")
+    public String listadoEventos(Model model){
+        List<DatosListadoEventos> listaEventos= eventoRepository.findAll().stream().map(DatosListadoEventos::new).toList();
+        model.addAttribute("listaEventos",listaEventos);
+        return "listaEventos";
     }
 }

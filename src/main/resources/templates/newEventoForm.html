@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>NewEvento</title>
 </head>
 <body>
-<h1>Guardar Equipo</h1>
+
+<br>
+<a th:href="@{/dot}" >Ir a Inicio</a>
+<br>
+<h1>Guardar Evento</h1>
 
  <form action="#" th:action="@{/guardarEvento}" th:object="${newEvento}" method="POST">
     <input type="text" th:field="*{equipo}" placeholder="Equipo id" >
-    <input type="text" th:field="*{fechaEvento}" placeholder="Fecha" >
-     <input type="number" th:field="*{contadorTotal}" placeholder="Contador" >
-     <input type="number" th:field="*{tipoEvento}" placeholder="Tipo Evento" >
+    <input type="date" th:field="*{fechaEvento}" placeholder="Fecha dd/MM/yyyy" >
+     <input type="text" th:field="*{contadorTotal}" placeholder="Contador" >
+     <input type="text" th:field="*{tipoEvento}" placeholder="Tipo Evento" >
      <input type="text" th:field="*{detalle}" placeholder="Detalle" >
      <button type="submit">Guardar Evento</button>
 </form>
