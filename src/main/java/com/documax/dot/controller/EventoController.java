@@ -48,11 +48,22 @@ public class EventoController {
     }
 
     @GetMapping("/buscarUltimaLectura/{id}")
-    public String  buscarUltimoContador(@PathVariable (value="id") Long equipo_id){
+    public String buscarUltimoContador(@PathVariable (value="id") Long equipo_id, Model model){
         System.out.println("entró");
-        Evento evento;
-        evento = eventoRepository.findFirstByEquipo_idOrderByFechaEventoDesc(equipo_id);
+        Evento evento = eventoRepository.findFirstByEquipo_idOrderByFechaEventoDesc(equipo_id);
         System.out.println("Contador traido= "+evento.getContadorTotal()+" en la fecha= "+evento.getFechaEvento());
-        return "listaEventos";
+        System.out.println("Cliente traido= "+evento.getEquipo().getCliente().getNombre()+" en la fecha= "+evento.getFechaEvento());
+        model.addAttribute("ultimoEvento",evento);
+        Evento nuevoEvento= new Evento();
+        model.addAttribute("newEvento", nuevoEvento);
+        return "nuevaTomaContador";
+
     }
+    public String mandoDatos(Model model , Evento evento){
+        model.addAttribute("ultimoEvento",evento);
+        Evento nuevoEvento= new Evento();
+        model.addAttribute("nuevoEvento", nuevoEvento);
+        return "nuevaTomaContador";
+    }
+
 }

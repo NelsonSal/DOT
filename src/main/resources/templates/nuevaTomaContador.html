@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado Eventos</title>
+</head>
+<body>
+<h2 align="center">NUEVA TOMA CONTADOR</h2>
+
+<br>
+<a th:href="@{/dot}" >Ir a Inicio</a>
+<br>
+<a th:href="@{/agregarEvento}" >Agregar Evento</a>
+
+    <div align="center">
+      <table border="1">
+          <thead>
+            <th>Consecutivo</th>
+            <th>Cliente</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Fecha Evento</th>
+            <th>Contador Total</th>
+            <th>Tipo Evento</th>
+            <th>Detalle</th>
+          </thead>
+          <tbody>
+            <tr th:object=${ultimoEvento} >
+                <td th:text="${ultimoEvento.id}"></td>
+                <td th:text="${ultimoEvento.equipo.cliente.nombre}"></td>
+                <td th:text="${ultimoEvento.equipo.marca.name}"></td>
+                <td th:text="${ultimoEvento.equipo.modelo.name}"></td>
+<!--                <td th:text="${evento.fechaEvento}"></td>-->
+                <td th:text="${#dates.format (ultimoEvento.fechaEvento, 'dd/MM/yyyy')}"></td>
+                <td th:text="${ultimoEvento.contadorTotal}"></td>
+                <td th:text="${ultimoEvento.tipoEvento}"></td>
+                <td th:text="${ultimoEvento.detalle}"></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+    <div>
+        <form action="#" th:action="@{/guardarEvento/{id}(id=${ultimoEvento.equipo.id})}" th:object="${newEvento}" method="POST">
+            <a th:text="${ultimoEvento.equipo.id}"></a>
+<!--            <input type="text" th:field="*{equipo}" placeholder="Equipo id" >-->
+            <input type="date" th:field="*{fechaEvento}" placeholder="Fecha dd/MM/yyyy" >
+            <input type="text" th:field="*{contadorTotal}" placeholder="Contador" >
+            <input type="text" th:field="*{tipoEvento}" placeholder="Tipo Evento" >
+            <input type="text" th:field="*{detalle}" placeholder="Detalle" >
+            <a th:number="${ultimoEvento.equipo.id}"></a>
+            <button type="submit">Guardar Evento</button>
+        </form>
+    </div>
+</body>
+</html>

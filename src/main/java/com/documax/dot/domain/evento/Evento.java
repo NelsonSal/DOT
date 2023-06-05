@@ -19,7 +19,7 @@ public class Evento {
     private Long id;
     @ManyToOne
     private Equipo equipo;
-    @DateTimeFormat (pattern = "yyyy-MM-dd")
+    //@DateTimeFormat (pattern = "yyyy-MM-dd")
     private Date fechaEvento;
     private Long contadorTotal;
 
