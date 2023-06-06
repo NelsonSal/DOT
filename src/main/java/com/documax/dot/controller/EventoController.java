@@ -4,7 +4,9 @@ import com.documax.dot.domain.dto.DatosAgregarEquipo;
 import com.documax.dot.domain.dto.DatosListadoEquipos;
 import com.documax.dot.domain.dto.DatosListadoEventos;
 import com.documax.dot.domain.dto.DatosRegistroEvento;
+import com.documax.dot.domain.equipo.Equipo;
 import com.documax.dot.domain.evento.Evento;
+import com.documax.dot.repository.EquipoRepository;
 import com.documax.dot.repository.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,12 +19,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class EventoController {
 
     @Autowired
     private EventoRepository eventoRepository;
+    @Autowired
+    private EquipoRepository equipoRepository;
 
     @GetMapping("/agregarEvento")
     public String mostrarFormNewEvento(Model model){
@@ -35,7 +40,7 @@ public class EventoController {
     public String guardaNewEvento(@ModelAttribute("newEvento")DatosRegistroEvento datosRegistroEvento) throws ParseException {
         System.out.println("fecha desde formulario= "+datosRegistroEvento.fechaEvento());
         //SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
+        System.out.println(datosRegistroEvento);
         eventoRepository.save(new Evento(datosRegistroEvento));
         return "redirect:/listadoEventos";
     }
@@ -66,4 +71,17 @@ public class EventoController {
         return "nuevaTomaContador";
     }
 
+    @PostMapping("/guardarEvento/{id}")
+    public String guardaNewEventoPorId(@ModelAttribute("newEvento")DatosRegistroEvento datosRegistroEvento,@PathVariable (value="id") Long equipo_idd)  {
+        //System.out.println("fecha desde formulario= " + datosRegistroEvento.fechaEvento());
+        //SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Long id5=equipo_idd;
+        Optional<Equipo> equipo = equipoRepository.findById(equipo_idd);
+        System.out.println(datosRegistroEvento);
+        Evento evento= new Evento();
+
+        //System.out.println(evento);
+        //eventoRepository.save(new Evento(datosRegistroEvento));
+        return "redirect:/listadoEventos";
+    }
 }

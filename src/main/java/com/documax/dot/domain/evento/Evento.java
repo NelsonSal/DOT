@@ -4,12 +4,12 @@ import com.documax.dot.domain.dto.DatosRegistroEvento;
 import com.documax.dot.domain.equipo.Equipo;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
+
 @Table(name="eventos")
 @Entity(name="Evento")
 @EqualsAndHashCode(of="id")
@@ -38,9 +38,12 @@ public class Evento {
         this.tipoEvento = tipoEvento;
         this.detalle = detalle;
     }
-
-//    public Evento(DatosRegistroEvento datosRegistroEvento) {
-//    }
+    public Evento( Date fechaEvento, Long contadorTotal, Long tipoEvento, String detalle) {
+        this.fechaEvento = fechaEvento;
+        this.contadorTotal = contadorTotal;
+        this.tipoEvento = tipoEvento;
+        this.detalle = detalle;
+    }
 
     public Evento(DatosRegistroEvento datosRegistroEvento) {
         //this.id = id;

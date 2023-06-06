@@ -12,11 +12,4 @@ public record DatosRegistroEvento(
         Long contadorTotal,
         Long tipoEvento,
         String detalle) {
- //  public DatosRegistroEvento(Evento evento){
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//        formatter.parse(strFechaEvento)
-
- //  }
-
-
 }

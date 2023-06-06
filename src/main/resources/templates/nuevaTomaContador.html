@@ -30,9 +30,8 @@
                 <td th:text="${ultimoEvento.equipo.cliente.nombre}"></td>
                 <td th:text="${ultimoEvento.equipo.marca.name}"></td>
                 <td th:text="${ultimoEvento.equipo.modelo.name}"></td>
-<!--                <td th:text="${evento.fechaEvento}"></td>-->
                 <td th:text="${#dates.format (ultimoEvento.fechaEvento, 'dd/MM/yyyy')}"></td>
-                <td th:text="${ultimoEvento.contadorTotal}"></td>
+                <td th:text="${ultimoEvento.contadorTotal}" ></td>
                 <td th:text="${ultimoEvento.tipoEvento}"></td>
                 <td th:text="${ultimoEvento.detalle}"></td>
             </tr>
@@ -40,9 +39,9 @@
       </table>
     </div>
     <div>
-        <form action="#" th:action="@{/guardarEvento/{id}(id=${ultimoEvento.equipo.id})}" th:object="${newEvento}" method="POST">
+        <form action="#" th:action="@{/guardarEvento}" th:object="${newEvento}" method="POST">
             <a th:text="${ultimoEvento.equipo.id}"></a>
-<!--            <input type="text" th:field="*{equipo}" placeholder="Equipo id" >-->
+            <input type="text" id="equipo" name="equipo"  th:value="${ultimoEvento.equipo.id}" >
             <input type="date" th:field="*{fechaEvento}" placeholder="Fecha dd/MM/yyyy" >
             <input type="text" th:field="*{contadorTotal}" placeholder="Contador" >
             <input type="text" th:field="*{tipoEvento}" placeholder="Tipo Evento" >
@@ -50,6 +49,25 @@
             <a th:number="${ultimoEvento.equipo.id}"></a>
             <button type="submit">Guardar Evento</button>
         </form>
+        <input type="button" value="Liquida" th:onclick="totalPaginas();">
     </div>
 </body>
+<script type="text/javascript">
+function totalPaginas()
+{
+    var contFinal=parseInt(document.getElementById('contadorTotal').value);
+    let obtenerDato = document.getElementsByTagName("td");
+    var contInicio=parseInt(obtenerDato[5].innerHTML );
+    var paginas=contFinal-contInicio; alert ("El numero de Páginas es: "+paginas);
+
+    var date_1 = new Date(obtenerDato[4].innerHTML);
+    var date_2 = new Date(document.getElementById('fechaEvento').value);
+    console.log(date_1 , date_2);
+    var day_as_milliseconds = 86400000;
+    var diff_in_millisenconds = date_2 - date_1;
+    var diff_in_days = diff_in_millisenconds / day_as_milliseconds;
+
+    console.log( diff_in_days );
+}
+</script>
 </html>
