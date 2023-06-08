@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+
+<head th:replace="~{layout/layout :: head}">
     <meta charset="UTF-8">
-    <title>Agregar Equipo</title>
+    <title>DOT inicio</title>
+
 </head>
 <body>
-<h1>Guardar Equipo</h1>
 
- <form action="#" th:action="@{/guardarEquipo}" th:object="${equipo}" method="POST">
-    <input type="text" th:field="*{serial}" placeholder="Serial" >
-    <input type="text" th:field="*{marca}" placeholder="Marca" >
-    <input type="text" th:field="*{modelo}" placeholder="Modelo" >
-    <input type="text" th:field="*{cliente}" placeholder="Cliente" >
-     <button type="submit">Guardar equipo</button>
-</form>
+
+<div class="container-fluid" layout:fragment="page-content">
+    <h1>Guardar Equipo</h1>
+
+    <form action="#" th:action="@{/guardarEquipo}" th:object="${equipo}" method="POST">
+        <input type="text" th:field="*{serial}" placeholder="Serial" >
+        <input type="text" th:field="*{marca}" placeholder="Marca" >
+        <input type="text" th:field="*{modelo}" placeholder="Modelo" >
+        <input type="text" th:field="*{cliente}" placeholder="Cliente" >
+        <button type="submit">Guardar equipo</button>
+    </form>
+</div>
+
 </body>
 </html>

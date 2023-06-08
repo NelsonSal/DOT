@@ -1,20 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+
+<head th:replace="~{layout/layout :: head}">
+
     <meta charset="UTF-8">
-    <title>Listado Eventos</title>
+    <title>DOT inicio</title>
+
 </head>
 <body>
-<h2 align="center">NUEVA TOMA CONTADOR</h2>
 
-<br>
-<a th:href="@{/dot}" >Ir a Inicio</a>
-<br>
-<a th:href="@{/agregarEvento}" >Agregar Evento</a>
+
+<div class="container-fluid" layout:fragment="page-content">
+    <h2 align="center">NUEVA TOMA CONTADOR</h2>
+
+    <br>
+    <a th:href="@{/dot}" >Ir a Inicio</a>
+    <br>
+    <a th:href="@{/agregarEvento}" >Agregar Evento</a>
 
     <div align="center">
-      <table border="1">
-          <thead>
+        <table border="1">
+            <thead>
             <th>Consecutivo</th>
             <th>Cliente</th>
             <th>Marca</th>
@@ -23,8 +32,8 @@
             <th>Contador Total</th>
             <th>Tipo Evento</th>
             <th>Detalle</th>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr th:object=${ultimoEvento} >
                 <td th:text="${ultimoEvento.id}"></td>
                 <td th:text="${ultimoEvento.equipo.cliente.nombre}"></td>
@@ -35,8 +44,8 @@
                 <td th:text="${ultimoEvento.tipoEvento}"></td>
                 <td th:text="${ultimoEvento.detalle}"></td>
             </tr>
-          </tbody>
-      </table>
+            </tbody>
+        </table>
     </div>
     <div>
         <form action="#" th:action="@{/guardarEvento}" th:object="${newEvento}" method="POST">
@@ -51,8 +60,10 @@
         </form>
         <input type="button" value="Liquida" th:onclick="totalPaginas();">
     </div>
-</body>
-<script type="text/javascript">
+</div>
+<!--OTRO SCRIPTS PARA PAGINAS-->
+<th:block layout:fragment="page-scripts">
+    <script type="text/javascript">
 function totalPaginas()
 {
     var contFinal=parseInt(document.getElementById('contadorTotal').value);
@@ -70,4 +81,7 @@ function totalPaginas()
     console.log( diff_in_days );
 }
 </script>
+</th:block>
+</body>
+
 </html>

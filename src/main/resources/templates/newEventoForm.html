@@ -1,24 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+
+<head th:replace="~{layout/layout :: head}">
     <meta charset="UTF-8">
-    <title>NewEvento</title>
+    <title>DOT inicio</title>
+
 </head>
 <body>
 
-<br>
-<a th:href="@{/dot}" >Ir a Inicio</a>
-<br>
-<h1>Guardar Evento</h1>
 
- <form action="#" th:action="@{/guardarEvento}" th:object="${newEvento}" method="POST">
-    <input type="text" th:field="*{equipo}" placeholder="Equipo id" >
-    <input type="date" th:field="*{fechaEvento}" placeholder="Fecha dd/MM/yyyy" >
-     <input type="text" th:field="*{contadorTotal}" placeholder="Contador" >
-     <input type="text" th:field="*{tipoEvento}" placeholder="Tipo Evento" >
-     <input type="text" th:field="*{detalle}" placeholder="Detalle" >
-     <button type="submit">Guardar Evento</button>
-</form>
+<div class="container-fluid" layout:fragment="page-content">
+    <br>
+    <a th:href="@{/dot}" >Ir a Inicio</a>
+    <br>
+    <h1>Guardar Evento</h1>
+
+    <form action="#" th:action="@{/guardarEvento}" th:object="${newEvento}" method="POST">
+        <input type="text" th:field="*{equipo}" placeholder="Equipo id" >
+        <input type="date" th:field="*{fechaEvento}" placeholder="Fecha dd/MM/yyyy" >
+        <input type="text" th:field="*{contadorTotal}" placeholder="Contador" >
+        <input type="text" th:field="*{tipoEvento}" placeholder="Tipo Evento" >
+        <input type="text" th:field="*{detalle}" placeholder="Detalle" >
+        <button type="submit">Guardar Evento</button>
+    </form>
+</div>
+
+
 </body>
 </html>
 

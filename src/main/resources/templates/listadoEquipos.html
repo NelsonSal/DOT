@@ -1,28 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+
+<head th:replace="~{layout/layout :: head}">
     <meta charset="UTF-8">
-    <title>Listado</title>
+    <title>EQUIPOS</title>
+
 </head>
 <body>
-<h2 align="center">LISTADO DE EQUIPOS</h2>
 
-<br>
-<a th:href="@{/dot}" >Ir a Inicio</a>
-<br>
-<a th:href="@{/agregarEquipo}" >Agregar Equipo</a>
 
-    <div align="center">
-      <table border="1">
-          <thead>
+<div class="container-fluid" layout:fragment="page-content">
+    <h2 align="center">LISTADO DE EQUIPOS</h2>
+
+    <a th:href="@{/agregarEquipo}" >Agregar Equipo</a>
+
+    <div align="center" class="container my-2">
+        <table class="table table-striped table-hover">
+            <thead>
             <th>id</th>
             <th>Serial</th>
             <th>Marca</th>
             <th>Modelo</th>
             <th>Cliente</th>
             <th>Accion</th>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr th:each="equipo : ${ListaEquipos} ">
                 <td th:text="${equipo.id}"></td>
                 <td th:text="${equipo.serial}"></td>
@@ -31,8 +36,10 @@
                 <td th:text="${equipo.cliente}"></td>
                 <td><a th:href="@{/buscarUltimaLectura/{id}(id=${equipo.id})}">TC</a></td>
             </tr>
-          </tbody>
-      </table>
+            </tbody>
+        </table>
+</div>
+
     </div>
 </body>
 </html>

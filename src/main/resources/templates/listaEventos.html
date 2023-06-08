@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+
+<head th:replace="~{layout/layout :: head}">
     <meta charset="UTF-8">
-    <title>Listado Eventos</title>
+    <title>EVENTOS</title>
+
 </head>
 <body>
-<h2 align="center">LISTADO DE EVENTOS</h2>
 
-<br>
-<a th:href="@{/dot}" >Ir a Inicio</a>
-<br>
-<a th:href="@{/agregarEvento}" >Agregar Evento</a>
 
+<div class="container-fluid" layout:fragment="page-content">
     <div align="center">
-      <table border="1">
-          <thead>
+        <h2 align="center">LISTADO DE EVENTOS</h2>
+
+        <br>
+        <a th:href="@{/dot}" >Ir a Inicio</a>
+        <br>
+        <a th:href="@{/agregarEvento}" >Agregar Evento</a>
+        <table border="1">
+            <thead>
             <th>Consecutivo</th>
             <th>Cliente</th>
             <th>Marca</th>
@@ -23,21 +30,25 @@
             <th>Contador Total</th>
             <th>Tipo Evento</th>
             <th>Detalle</th>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr th:each="evento : ${listaEventos} ">
                 <td th:text="${evento.id}"></td>
                 <td th:text="${evento.cliente}"></td>
                 <td th:text="${evento.marca}"></td>
                 <td th:text="${evento.modelo}"></td>
-<!--                <td th:text="${evento.fechaEvento}"></td>-->
+                <!--                <td th:text="${evento.fechaEvento}"></td>-->
                 <td th:text="${#dates.format (evento.fechaEvento, 'dd/MM/yyyy')}"></td>
                 <td th:text="${evento.contadorTotal}"></td>
                 <td th:text="${evento.tipoEvento}"></td>
                 <td th:text="${evento.detalle}"></td>
             </tr>
-          </tbody>
-      </table>
+            </tbody>
+        </table>
     </div>
+</div>
+
+
+
 </body>
 </html>
