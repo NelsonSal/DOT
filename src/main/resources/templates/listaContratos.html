@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+
+<head th:replace="~{layout/layout :: head}">
+    <meta charset="UTF-8">
+    <title>CONTRATOS</title>
+
+</head>
+<body>
+
+
+<div class="container-fluid" layout:fragment="page-content">
+    <div >
+        <div class="container my-2">
+        <h2>LISTADO DE CONTRATOS</h2>
+        <br>
+        <a th:href="@{/nuevoContrato}" class="btn btn-primary">Agregar Contrato</a>
+        <br><br>
+
+
+        <table  class="table table-striped table-hover">
+            <thead>
+            <th>ID</th>
+            <th>Ref Contrato</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Modelo</th>
+            <th>Páginas</th>
+            <th>CxP</th>
+            <th>CxP+</th>
+            <th>Scan</th>
+            <th>CxS+</th>
+            <th>Detalle</th>
+            </thead>
+            <tbody>
+            <tr th:each="contrato : ${listaContratos} ">
+                <td th:text="${contrato.id}"></td>
+                <td th:text="${contrato.refContrato}"></td>
+                <td th:text="${#dates.format (contrato.fechaContrato, 'dd/MM/yyyy')}"></td>
+                <td th:text="${contrato.cliente}"></td>
+                <td th:text="${contrato.equipo}"></td>
+                <td th:text="${contrato.cupoPaginas}"></td>
+                <td th:text="${contrato.costoPagina}"></td>
+                <td th:text="${contrato.costoPaginaAdicional}"></td>
+                <td th:text="${contrato.cupoScan}"></td>
+                <td th:text="${contrato.costoScanAdicional}"></td>
+                <td th:text="${contrato.detalles}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

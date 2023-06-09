@@ -13,14 +13,15 @@
 
 
 <div class="container-fluid" layout:fragment="page-content">
-    <div align="center">
-        <h2 align="center">LISTADO DE EVENTOS</h2>
+    <div >
+        <div class="container my-2">
+        <h2>LISTADO DE EVENTOS</h2>
+        <br>
+        <a th:href="@{/agregarEvento}" class="btn btn-primary">Agregar Evento</a>
+        <br><br>
 
-        <br>
-        <a th:href="@{/dot}" >Ir a Inicio</a>
-        <br>
-        <a th:href="@{/agregarEvento}" >Agregar Evento</a>
-        <table border="1">
+
+        <table  class="table table-striped table-hover">
             <thead>
             <th>Consecutivo</th>
             <th>Cliente</th>
@@ -45,6 +46,7 @@
             </tr>
             </tbody>
         </table>
+        </div>
     </div>
 </div>
 

@@ -39,7 +39,6 @@ public class EventoController {
     @PostMapping("/guardarEvento")
     public String guardaNewEvento(@ModelAttribute("newEvento")DatosRegistroEvento datosRegistroEvento) throws ParseException {
         System.out.println("fecha desde formulario= "+datosRegistroEvento.fechaEvento());
-        //SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println(datosRegistroEvento);
         eventoRepository.save(new Evento(datosRegistroEvento));
         return "redirect:/listadoEventos";

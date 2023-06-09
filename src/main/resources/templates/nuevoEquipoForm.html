@@ -13,15 +13,17 @@
 
 
 <div class="container-fluid" layout:fragment="page-content">
-    <h1>Guardar Equipo</h1>
+    <div class="container my-2">
+        <h1>Guardar Equipo</h1>
 
-    <form action="#" th:action="@{/guardarEquipo}" th:object="${equipo}" method="POST">
-        <input type="text" th:field="*{serial}" placeholder="Serial" >
-        <input type="text" th:field="*{marca}" placeholder="Marca" >
-        <input type="text" th:field="*{modelo}" placeholder="Modelo" >
-        <input type="text" th:field="*{cliente}" placeholder="Cliente" >
-        <button type="submit">Guardar equipo</button>
-    </form>
+        <form action="#" th:action="@{/guardarEquipo}" th:object="${equipo}" method="POST">
+            <input type="text" th:field="*{serial}" placeholder="Serial" >
+            <input type="text" th:field="*{marca}" placeholder="Marca" >
+            <input type="text" th:field="*{modelo}" placeholder="Modelo" >
+            <input type="text" th:field="*{cliente}" placeholder="Cliente" >
+            <button type="submit">Guardar equipo</button>
+        </form>
+    </div>
 </div>
 
 </body>

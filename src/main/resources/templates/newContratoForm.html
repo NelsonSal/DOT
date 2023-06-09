@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+
+<head th:replace="~{layout/layout :: head}">
+    <meta charset="UTF-8">
+    <title>Nuevo Contrato</title>
+
+</head>
+<body>
+
+
+<div class="container-fluid" layout:fragment="page-content">
+    <div class="container my-2">
+        <h1>Nuevo Contrato</h1>
+
+        <form action="#" th:action="@{/guardarContrato}" th:object="${newContrato}" method="POST">
+            <input type="text" th:field="*{refContrato}" placeholder="Contrato No." class="form-control mb-4 col-4">
+            <input type="date" th:field="*{fechaContrato}" placeholder="Fecha dd/MM/yyyy"class="form-control mb-4 col-4" >
+            <input type="text" th:field="*{cupoPaginas}" placeholder="Páginas" class="form-control mb-4 col-4" >
+            <input type="text" th:field="*{costoPagina}" placeholder="CxP" class="form-control mb-4 col-4" >
+            <input type="text" th:field="*{costoPaginaAdicional}" placeholder="CxP +" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{cupoScan}" placeholder="Scans" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{costoScanAdicional}" placeholder="CxS +" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{detalles}" placeholder="Detalle" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{equipo}" placeholder="Equipo" class="form-control mb-4 col-4">
+            <button type="submit" class="btn btn-info col-2">Guardar Contrato</button>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
+

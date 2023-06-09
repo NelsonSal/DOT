@@ -14,38 +14,38 @@
 
 
 <div class="container-fluid" layout:fragment="page-content">
-    <h2 align="center">NUEVA TOMA CONTADOR</h2>
+    <div class="container my-2">
 
-    <br>
-    <a th:href="@{/dot}" >Ir a Inicio</a>
-    <br>
-    <a th:href="@{/agregarEvento}" >Agregar Evento</a>
+        <h2>NUEVA TOMA CONTADOR</h2>
+        <br>
+        <a th:href="@{/agregarEvento}" class="btn btn-primary">Agregar Evento</a>
 
-    <div align="center">
-        <table border="1">
-            <thead>
-            <th>Consecutivo</th>
-            <th>Cliente</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Fecha Evento</th>
-            <th>Contador Total</th>
-            <th>Tipo Evento</th>
-            <th>Detalle</th>
-            </thead>
-            <tbody>
-            <tr th:object=${ultimoEvento} >
-                <td th:text="${ultimoEvento.id}"></td>
-                <td th:text="${ultimoEvento.equipo.cliente.nombre}"></td>
-                <td th:text="${ultimoEvento.equipo.marca.name}"></td>
-                <td th:text="${ultimoEvento.equipo.modelo.name}"></td>
-                <td th:text="${#dates.format (ultimoEvento.fechaEvento, 'dd/MM/yyyy')}"></td>
-                <td th:text="${ultimoEvento.contadorTotal}" ></td>
-                <td th:text="${ultimoEvento.tipoEvento}"></td>
-                <td th:text="${ultimoEvento.detalle}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <div align="center">
+            <table border="1">
+                <thead>
+                <th>Consecutivo</th>
+                <th>Cliente</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Fecha Evento</th>
+                <th>Contador Total</th>
+                <th>Tipo Evento</th>
+                <th>Detalle</th>
+                </thead>
+                <tbody>
+                <tr th:object=${ultimoEvento} >
+                    <td th:text="${ultimoEvento.id}"></td>
+                    <td th:text="${ultimoEvento.equipo.cliente.nombre}"></td>
+                    <td th:text="${ultimoEvento.equipo.marca.name}"></td>
+                    <td th:text="${ultimoEvento.equipo.modelo.name}"></td>
+                    <td th:text="${#dates.format (ultimoEvento.fechaEvento, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${ultimoEvento.contadorTotal}" ></td>
+                    <td th:text="${ultimoEvento.tipoEvento}"></td>
+                    <td th:text="${ultimoEvento.detalle}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div>
         <form action="#" th:action="@{/guardarEvento}" th:object="${newEvento}" method="POST">
