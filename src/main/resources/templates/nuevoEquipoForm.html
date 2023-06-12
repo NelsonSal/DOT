@@ -20,7 +20,8 @@
             <input type="text" th:field="*{serial}" placeholder="Serial" >
             <input type="text" th:field="*{marca}" placeholder="Marca" >
             <input type="text" th:field="*{modelo}" placeholder="Modelo" >
-            <input type="text" th:field="*{cliente}" placeholder="Cliente" >
+<!--            <input type="text" th:field="*{cliente}" placeholder="Cliente" >-->
+            <input type="text" id="cliente" name="cliente" th:value="${1}">
             <button type="submit">Guardar equipo</button>
         </form>
     </div>

@@ -14,13 +14,13 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long identificacion;
+    private String identificacion;
     private String nombre;
 
     public Cliente() {
     }
 
-    public Cliente(Long id, Long identificacion, String nombre) {
+    public Cliente(Long id, String identificacion, String nombre) {
         this.id = id;
         this.identificacion = identificacion;
         this.nombre = nombre;
@@ -43,11 +43,11 @@ public class Cliente {
         this.id = id;
     }
 
-    public Long getIdentificacion() {
+    public String getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(Long identificacion) {
+    public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
 

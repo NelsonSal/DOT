@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+
+<head th:replace="~{layout/layout :: head}">
+    <meta charset="UTF-8">
+    <title>NEW CLIENTE</title>
+
+</head>
+<body>
+
+
+<div class="container-fluid" layout:fragment="page-content">
+    <div class="container my-2">
+        <h1>Nuevo Cliente</h1>
+
+        <form action="#" th:action="@{/agregarCliente}" th:object="${cliente}" method="POST">
+
+            <input type="text" th:field="*{identificacion}" placeholder="Identificacion" >
+            <input type="text" th:field="*{nombre}" placeholder="Nombre" >
+
+            <button type="submit">Guardar Cliente</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
