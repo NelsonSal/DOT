@@ -24,6 +24,7 @@ public class Equipo {
     @ManyToOne
     private Cliente cliente;
 
+
     public Equipo() {
     }
     public Equipo(DatosAgregarEquipo datosAgregarEquipo){
@@ -32,7 +33,14 @@ public class Equipo {
         this.modelo=datosAgregarEquipo.modelo();
         this.cliente=datosAgregarEquipo.cliente();
 
+
     }
+
+//    private Cliente clienteIni() {
+//        Cliente cliente = new Cliente(1l);
+//        return cliente;
+//    }
+
     public Equipo(Long id, String serial, Marca marca, Modelo modelo, Cliente cliente) {
         this.id = id;
         this.serial = serial;

@@ -9,4 +9,6 @@ public record DatosAgregarEquipo(String serial,
                                  Marca marca,
                                  Modelo modelo,
                                  Cliente cliente){
+
+
 }

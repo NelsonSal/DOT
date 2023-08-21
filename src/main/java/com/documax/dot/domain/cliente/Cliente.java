@@ -18,7 +18,10 @@ public class Cliente {
     private String nombre;
 
     public Cliente() {
+
+
     }
+
 
     public Cliente(Long id, String identificacion, String nombre) {
         this.id = id;
