@@ -3,13 +3,17 @@ package com.documax.dot.controller;
 import com.documax.dot.domain.dto.DatosAgregarEquipo;
 import com.documax.dot.domain.dto.DatosListadoEquipos;
 import com.documax.dot.domain.equipo.Equipo;
+import com.documax.dot.domain.evento.Evento;
 import com.documax.dot.repository.EquipoRepository;
+import com.documax.dot.repository.EventoRepository;
+import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 //@RestController
@@ -20,6 +24,9 @@ public class EquipoController {
 
     @Autowired
     private  EquipoRepository equipoRepository;
+    @Autowired
+    private EventoRepository eventoRepository;
+
 //    @Autowired
 //    private final DatosAgregarEquipo datosAgregarEquipo(
 //            this.datosAgregarEquipo=datosAgregarEquipo;
@@ -48,7 +55,23 @@ public class EquipoController {
     @PostMapping("/guardarEquipo")
     public String guardarEquipo(@ModelAttribute ("equipo") DatosAgregarEquipo datosAgregarEquipo){
         System.out.println(datosAgregarEquipo);
-        equipoRepository.save(new Equipo(datosAgregarEquipo));
+        Equipo equipo = new Equipo(datosAgregarEquipo); //Modificación para obtener el id del registro recien creado
+        //equipoRepository.save(new Equipo(datosAgregarEquipo));
+        equipoRepository.save(equipo); ////Modificación para obtener el id del registro recien creado
+        equipoRepository.flush(); //Modificación para obtener el id del registro recien creado. Se necesita?
+                                    //verificar pues estamos teniendo problemas (Memory?) en el servidor linux
+        long ultimoIdCreado= equipo.getId();
+        System.out.println("ultimo =" + ultimoIdCreado);
+        //Voy a crear el primer evento como Entrada al sistema:
+        Evento evento = new Evento();
+        evento.setEquipo(equipo);
+        Date date = new Date();
+        evento.setFechaEvento(date);
+        evento.setTipoEvento(1l);
+        evento.setDetalle("Creación en el sistema");
+        evento.setContadorTotal(0l);
+        eventoRepository.save(evento);
+
         return "redirect:/listadoEquipos";
     }
 

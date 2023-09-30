@@ -9,12 +9,10 @@ import lombok.NoArgsConstructor;
 @Table(name="clientes")
 @Entity(name="Cliente")
 
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of="identificacion")
 public class Cliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String identificacion;
+    private Long identificacion;
     private String nombre;
 
     public Cliente() {
@@ -23,34 +21,25 @@ public class Cliente {
     }
 
 
-    public Cliente(Long id, String identificacion, String nombre) {
-        this.id = id;
+    public Cliente(Long identificacion, String nombre) {
         this.identificacion = identificacion;
         this.nombre = nombre;
     }
 
-    public Cliente(Long id) {
-        this.id = id;
-    }
+
 
     public Cliente(DatosRegistroCliente datosRegistroCliente) {
         this.nombre=datosRegistroCliente.nombre();
         this.identificacion=datosRegistroCliente.identificacion();
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getIdentificacion() {
+    public Long getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(String identificacion) {
+    public void setIdentificacion(Long identificacion) {
         this.identificacion = identificacion;
     }
 
