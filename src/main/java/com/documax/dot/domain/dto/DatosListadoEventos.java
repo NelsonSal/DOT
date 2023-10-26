@@ -14,10 +14,11 @@ public record DatosListadoEventos(
         Date fechaEvento,
         Long contadorTotal,
         Long tipoEvento,
-        String detalle) {
+        String detalle,
+        Long equipo_id) {
     public DatosListadoEventos(Evento evento){
         this(evento.getId(),evento.getEquipo().getCliente().getNombre(),evento.getEquipo().getMarca().name(),evento.getEquipo().getModelo().name(),evento.getFechaEvento(),evento.getContadorTotal(),evento.getTipoEvento(),
-                evento.getDetalle());
+                evento.getDetalle(), evento.getEquipo().getId());
 
     }
 }

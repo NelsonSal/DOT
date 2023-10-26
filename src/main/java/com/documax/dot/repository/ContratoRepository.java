@@ -4,4 +4,5 @@ import com.documax.dot.domain.contrato.Contrato;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ContratoRepository extends JpaRepository<Contrato, Long> {
+    Contrato findByEquipo_id(Long Id);
 }

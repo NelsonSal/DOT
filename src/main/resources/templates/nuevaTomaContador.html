@@ -18,67 +18,101 @@
 
         <h2>NUEVA TOMA CONTADOR</h2>
         <br>
-        <a th:href="@{/agregarEvento}" class="btn btn-primary">Agregar Evento</a>
+        <!-- <a th:href="@{/agregarEvento}" class="btn btn-primary">Agregar Evento</a> -->
+        <div style="display: inline-block">
+            <div style="display: inline-block">
+                <TABLE BORDER>
+                    <tr><th>CLIENTE  </th>
+                        <td>   </td>  <td th:text="${ultimoEvento.equipo.cliente.nombre}"></td></tr>
+                    <tr><th>MARCA</th>
+                        <td>   </td> <td th:text="${ultimoEvento.equipo.marca.name}"></td></tr>
+                    <tr><th>MODELO</th>
+                        <td>   </td>  <td th:text="${ultimoEvento.equipo.modelo.name}"></td></tr>
+                    <tr><th>SERIE</th>
+                        <td>   </td>  <td th:text="${ultimoEvento.equipo.serial}"></td></tr>
+                    <tr><th>CONTRATO</th>
+                        <td>   </td>  <td th:text="${contrato.refContrato}"></td></tr>
+                    <tr><th>INICIO</th>
+                        <td>   </td>  <td th:text="${#dates.format (contrato.fechaContrato, 'dd/MM/yyyy')}"></td></tr>
+                </TABLE>
+            </div>
 
-        <div align="center">
-            <table border="1">
-                <thead>
-                <th>Consecutivo</th>
-                <th>Cliente</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Fecha Evento</th>
-                <th>Contador Total</th>
-                <th>Tipo Evento</th>
-                <th>Detalle</th>
-                </thead>
-                <tbody>
-                <tr th:object=${ultimoEvento} >
-                    <td th:text="${ultimoEvento.id}"></td>
-                    <td th:text="${ultimoEvento.equipo.cliente.nombre}"></td>
-                    <td th:text="${ultimoEvento.equipo.marca.name}"></td>
-                    <td th:text="${ultimoEvento.equipo.modelo.name}"></td>
-                    <td th:text="${#dates.format (ultimoEvento.fechaEvento, 'dd/MM/yyyy')}"></td>
-                    <td th:text="${ultimoEvento.contadorTotal}" ></td>
-                    <td th:text="${ultimoEvento.tipoEvento}"></td>
-                    <td th:text="${ultimoEvento.detalle}"></td>
-                </tr>
-                </tbody>
-            </table>
+            <div style="display: inline-block">
+                <TABLE BORDER>
+                    <tr><th>PAGINAS  </th>
+                        <td>   </td>  <td th:text="${contrato.cupoPaginas}"></td></tr>
+                    <tr><th>$xPágina</th>
+                        <td>   </td> <td th:text="${contrato.costoPagina}"></td></tr>
+                    <tr><th>$xPágAdicional</th>
+                        <td>   </td>  <td th:text="${contrato.costoPaginaAdicional}"></td></tr>
+                    <tr><th>$xScan</th>
+                        <td>   </td>  <td th:text="${contrato.cupoScan}"></td></tr>
+                    <tr><th>$xScanAdicional</th>
+                        <td>   </td>  <td th:text="${contrato.costoScanAdicional}"></td></tr>
+                    <tr><th>Head3</th>
+                        <td>   </td>  <td>Item 9</td></tr>
+                </TABLE>
+            </div>
         </div>
-    </div>
-    <div>
-        <form action="#" th:action="@{/guardarEvento}" th:object="${newEvento}" method="POST">
-            <a th:text="${ultimoEvento.equipo.id}"></a>
-            <input type="text" id="equipo" name="equipo"  th:value="${ultimoEvento.equipo.id}" >
-            <input type="date" th:field="*{fechaEvento}" placeholder="Fecha dd/MM/yyyy" >
-            <input type="text" th:field="*{contadorTotal}" placeholder="Contador" >
-            <input type="text" th:field="*{tipoEvento}" placeholder="Tipo Evento" >
-            <input type="text" th:field="*{detalle}" placeholder="Detalle" >
-            <a th:number="${ultimoEvento.equipo.id}"></a>
-            <button type="submit">Guardar Evento</button>
-        </form>
-        <input type="button" value="Liquida" th:onclick="totalPaginas();">
-    </div>
-</div>
-<!--OTRO SCRIPTS PARA PAGINAS-->
+
+        <br><br>
+
+        <div style="display: inline-block">
+            <div style="display: inline-block">
+                <form action="#" th:action="@{/guardarEvento}" th:object="${newEvento}"  method="POST" >
+                    <input type="hidden" id="equipo" name="equipo"  th:value="${ultimoEvento.equipo.id}" >
+                    <TABLE BORDER>
+                        <tr><th>FECHA  </th>
+                            <td th:text="${#dates.format (ultimoEvento.fechaEvento, 'dd/MM/yyyy')}"></td><td> <input type="date" th:field="*{fechaEvento}" placeholder="Fecha dd/MM/yyyy" >  </td></tr>
+                        <tr><th>PAGINAS</th>
+                            <td th:text="${ultimoEvento.contadorTotal}" ></td> <td> <input type="text" th:field="*{contadorTotal}" placeholder="Contador" ></td></tr>
+                        <tr><th>TIPO EVENTO</th>
+                            <td>   </td>  <td> <input type="text" th:field="*{tipoEvento}" placeholder="Tipo Evento" ></td></tr>
+                        <tr><th>DETALLE</th>
+                            <td>   </td>  <td> <input type="text" th:field="*{detalle}" placeholder="Detalle" ></td></tr>
+                        <tr><th>CONTRATO</th>
+                            <td>   </td>  <td th:text="${contrato.refContrato}"></td></tr>
+                        <tr><th>INICIO</th>
+                            <td>   </td>  <td th:text="${#dates.format (contrato.fechaContrato, 'dd/MM/yyyy')}"></td></tr>
+                    </TABLE>
+                      <button type="submit">Guardar Evento</button>
+                </form>
+
+            </div>
+         </div>
+
+         <input type="button" value="Validar" th:onclick="totalPaginas();">
+     </div>
+ </div>
+ <!--OTRO SCRIPTS PARA PAGINAS-->
 <th:block layout:fragment="page-scripts">
     <script type="text/javascript">
 function totalPaginas()
 {
+    //tomamos valores de contadores del html, el actual por etiqueta y el inicial por tagname
     var contFinal=parseInt(document.getElementById('contadorTotal').value);
     let obtenerDato = document.getElementsByTagName("td");
-    var contInicio=parseInt(obtenerDato[5].innerHTML );
-    var paginas=contFinal-contInicio; alert ("El numero de Páginas es: "+paginas);
-
-    var date_1 = new Date(obtenerDato[4].innerHTML);
+    var contInicio=parseInt(obtenerDato[26].innerHTML );
+    var paginas=contFinal-contInicio;
+    //tomamos las fechas anterior(por etiqueta) y el actual por tagname
+    var date =(obtenerDato[24].innerHTML);
+    console.log(date);
     var date_2 = new Date(document.getElementById('fechaEvento').value);
-    console.log(date_1 , date_2);
+    console.log(date_2);
+    //Convertimos dd/mm/yyyy a formato string largo
+    var dateString = date;
+    var dateParts = dateString.split("/");
+    // month is 0-based, that's why we need dataParts[1] - 1
+    var date_1 = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+    console.log(date_1);
+    //conveetimos a milisegundos para poder restar las fechas
     var day_as_milliseconds = 86400000;
     var diff_in_millisenconds = date_2 - date_1;
-    var diff_in_days = diff_in_millisenconds / day_as_milliseconds;
+    var diff_in_days = Math.ceil(diff_in_millisenconds / day_as_milliseconds);
 
     console.log( diff_in_days );
+    alert ("El numero de Páginas es: "+paginas+ "\n"+ "Dias : "+diff_in_days)
+
 }
 </script>
 </th:block>

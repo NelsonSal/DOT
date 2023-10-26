@@ -62,6 +62,8 @@ public class EquipoController {
                                     //verificar pues estamos teniendo problemas (Memory?) en el servidor linux
         long ultimoIdCreado= equipo.getId();
         System.out.println("ultimo =" + ultimoIdCreado);
+
+        //TODO revisar esta seccion, debe poderse hacer mejor
         //Voy a crear el primer evento como Entrada al sistema:
         Evento evento = new Evento();
         evento.setEquipo(equipo);

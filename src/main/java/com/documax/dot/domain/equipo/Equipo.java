@@ -1,6 +1,7 @@
 package com.documax.dot.domain.equipo;
 
 import com.documax.dot.domain.cliente.Cliente;
+import com.documax.dot.domain.contrato.Contrato;
 import com.documax.dot.domain.dto.DatosAgregarEquipo;
 import com.documax.dot.domain.dto.DatosListadoEquipos;
 import jakarta.persistence.*;
@@ -25,6 +26,7 @@ public class Equipo {
     private Cliente cliente;
 
 
+
     public Equipo() {
     }
     public Equipo(DatosAgregarEquipo datosAgregarEquipo){
@@ -32,6 +34,7 @@ public class Equipo {
         this.marca=datosAgregarEquipo.marca();
         this.modelo=datosAgregarEquipo.modelo();
         this.cliente=datosAgregarEquipo.cliente();
+        //this.contrato=datosAgregarEquipo.contrato();
 
 
     }
@@ -47,6 +50,7 @@ public class Equipo {
         this.marca = marca;
         this.modelo = modelo;
         this.cliente = cliente;
+
     }
 
     public Long getId() {
@@ -88,4 +92,6 @@ public class Equipo {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+
 }

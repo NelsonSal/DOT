@@ -31,6 +31,7 @@
             <th>Contador Total</th>
             <th>Tipo Evento</th>
             <th>Detalle</th>
+            <th>Accion</th>
             </thead>
             <tbody>
             <tr th:each="evento : ${listaEventos} ">
@@ -43,6 +44,7 @@
                 <td th:text="${evento.contadorTotal}"></td>
                 <td th:text="${evento.tipoEvento}"></td>
                 <td th:text="${evento.detalle}"></td>
+                <td><a th:href="@{/agregarLiquidacion/{id}(id=${evento.equipo_id})}">LQ</a></td>
             </tr>
             </tbody>
         </table>
