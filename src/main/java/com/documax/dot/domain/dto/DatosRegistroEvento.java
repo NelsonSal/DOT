@@ -10,6 +10,8 @@ public record DatosRegistroEvento(
         Equipo equipo,
         String fechaEvento,
         Long contadorTotal,
+        Long contadorScan,
         Long tipoEvento,
-        String detalle) {
+        String detalle,
+        boolean chargeScan) {
 }

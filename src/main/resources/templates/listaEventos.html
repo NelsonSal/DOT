@@ -23,12 +23,13 @@
 
         <table  class="table table-striped table-hover">
             <thead>
-            <th>Consecutivo</th>
+            <th>id</th>
             <th>Cliente</th>
             <th>Marca</th>
             <th>Modelo</th>
             <th>Fecha Evento</th>
             <th>Contador Total</th>
+            <th>Contador Scan</th>
             <th>Tipo Evento</th>
             <th>Detalle</th>
             <th>Accion</th>
@@ -42,6 +43,7 @@
                 <!--                <td th:text="${evento.fechaEvento}"></td>-->
                 <td th:text="${#dates.format (evento.fechaEvento, 'dd/MM/yyyy')}"></td>
                 <td th:text="${evento.contadorTotal}"></td>
+                <td th:text="${evento.contadorScan}"></td>
                 <td th:text="${evento.tipoEvento}"></td>
                 <td th:text="${evento.detalle}"></td>
                 <td><a th:href="@{/agregarLiquidacion/{id}(id=${evento.equipo_id})}">LQ</a></td>

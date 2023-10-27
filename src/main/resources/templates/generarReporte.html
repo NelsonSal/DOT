@@ -7,7 +7,7 @@
 <head th:replace="~{layout/layout :: head}">
 
     <meta charset="UTF-8">
-    <title>DOT inicio</title>
+    <title>REPORTE</title>
 
 </head>
 <body>
@@ -16,7 +16,7 @@
 <div class="container-fluid" layout:fragment="page-content">
     <div class="container my-2">
 
-        <h2>NUEVA TOMA CONTADOR</h2>
+        <h2>REPORTE TOMA CONTADOR</h2>
         <br>
         <!-- <a th:href="@{/agregarEvento}" class="btn btn-primary">Agregar Evento</a> -->
         <div style="display: inline-block">
@@ -45,7 +45,7 @@
                         <TD>   </TD> <td th:text="${contrato.costoPagina}"></td></TR>
                     <TR><TH>$xPágAdicional</TH>
                         <TD>   </TD>  <td th:text="${contrato.costoPaginaAdicional}"></td></TR>
-                    <TR><TH>$xScan</TH>
+                    <TR><TH>SCAN Incluidos</TH>
                         <TD>   </TD>  <td th:text="${contrato.cupoScan}"></td></TR>
                     <TR><TH>$xScanAdicional</TH>
                         <TD>   </TD>  <td th:text="${contrato.costoScanAdicional}"></td></TR>
@@ -62,18 +62,20 @@
                 <form action="#" th:action="@{/guardarEvento}" th:object="${newEvento}" method="POST">
                     <input type="hidden" id="equipo" name="equipo"  th:value="${ultimoEvento.equipo.id}" >
                     <TABLE BORDER>
-                        <TR><TH>FECHA  </TH>
-                            <td th:text="${#dates.format (ultimoEvento.fechaEvento, 'dd/MM/yyyy')}"></td><TD> <input type="date" th:field="*{fechaEvento}" placeholder="Fecha dd/MM/yyyy" >  </TD></TR>
+                        <TR><TH>FECHAS  </TH>
+                            <td th:text="${#dates.format (ultimoEvento.fechaEvento, 'dd/MM/yyyy')}"></td><td th:text="${#dates.format (actualEvento.fechaEvento, 'dd/MM/yyyy')}"></td><td th:text="${liquidacion.diasTotales}"></td></TR>
                         <TR><TH>PAGINAS</TH>
-                            <td th:text="${ultimoEvento.contadorTotal}" ></td> <td> <input type="text" th:field="*{contadorTotal}" placeholder="Contador" ></td></TR>
-                        <TR><TH>TIPO EVENTO</TH>
-                            <TD>   </TD>  <td> <input type="text" th:field="*{tipoEvento}" placeholder="Tipo Evento" ></td></TR>
-                        <TR><TH>DETALLE</TH>
-                            <TD>   </TD>  <td> <input type="text" th:field="*{detalle}" placeholder="Detalle" ></td></TR>
-                        <TR><TH>CONTRATO</TH>
-                            <TD>   </TD>  <td th:text="${contrato.refContrato}"></td></TR>
-                        <TR><TH>INICIO</TH>
-                            <TD>   </TD>  <td th:text="${#dates.format (contrato.fechaContrato, 'dd/MM/yyyy')}"></td></TR>
+                            <td th:text="${ultimoEvento.contadorTotal}" ></td><td th:text="${actualEvento.contadorTotal}" ></td> <td th:text="${liquidacion.totalPaginas}" ></td>  </TR>
+                        <TR><TH>PAGINAS INCLUIDAS</TH>
+                            <td th:text="${contrato.cupoPaginas}" ></td>  <td th:text="${contrato.costoPagina}" ></td><td th:text="${liquidacion.cargoBasico}" ></td></TR>
+                        <TR><TH>PAGINAS ADICIONALES</TH>
+                            <td th:text="${liquidacion.getPagAdicionales()}" >  <td th:text="${contrato.costoPaginaAdicional}" ></td>  <td th:text="${liquidacion.costoPagAdicionales}"> </td> </TR>
+                        <TR><TH>SCAN</TH>
+                            <td th:text="${ultimoEvento.contadorScan}" ></td><td th:text="${actualEvento.contadorScan}" ></td> <td th:text="${liquidacion.totalScan}" ></td>  </TR>
+                        <TR><TH>SCAN ADICIONALES</TH>
+                            <td th:text="${liquidacion.scanAdicionales}" >  <td th:text="${contrato.costoScanAdicional}" ></td>  <td th:text="${liquidacion.costoScanAdicional}"> </td> </TR>
+                        <TR><TH>NOTA 1</TH>
+                            <TD>   </TD>   <td th:text="${liquidacion.nota1}" ></TR>
                     </TABLE>
                       <button type="submit">Guardar Evento</button>
                 </form>
@@ -174,6 +176,7 @@
          <input type="button" value="Liquida" th:onclick="totalPaginas();">
      </div>
  </div>
+    </div></DIV>
  <!--OTRO SCRIPTS PARA PAGINAS-->
 <th:block layout:fragment="page-scripts">
     <script type="text/javascript">

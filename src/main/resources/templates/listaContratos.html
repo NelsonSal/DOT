@@ -23,6 +23,7 @@
 
         <table  class="table table-striped table-hover">
             <thead>
+            <th>TC</th>
             <th>ID</th>
             <th>Ref Contrato</th>
             <th>Fecha</th>
@@ -37,6 +38,7 @@
             </thead>
             <tbody>
             <tr th:each="contrato : ${listaContratos} ">
+                <td><a th:href="@{/buscarUltimaLectura/{id}(id=${contrato.id1})}">TC</a></td>
                 <td th:text="${contrato.id}"></td>
                 <td th:text="${contrato.refContrato}"></td>
                 <td th:text="${#dates.format (contrato.fechaContrato, 'dd/MM/yyyy')}"></td>

@@ -7,6 +7,7 @@ import java.util.Date;
 public record DatosRegistroLiquidacion(
         Long id,
         Equipo equipo,
+        long cargoBasico,
         Date fechaInicio,
         Date fechaFinal,
         long diasTotales,

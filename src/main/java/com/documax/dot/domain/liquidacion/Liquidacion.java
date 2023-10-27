@@ -17,14 +17,16 @@ public class Liquidacion {
 
     @OneToOne
     private Equipo equipo;
-
+    private long cargoBasico;
     private Date fechaInicio;
     private Date fechaFinal;
     private long diasTotales;
     private long contadorPagInicial;
     private long contadorPagFinal;
+    private long totalPaginas;
     private long contadorScanInicial;
     private long contadorScanFinal;
+    private long totalScan;
     private long pagAdicionales;
     private long scanAdicionales;
     private boolean pagoMinimo;
@@ -37,20 +39,23 @@ public class Liquidacion {
     public Liquidacion() {
     }
 
-    public Liquidacion(Long id, Equipo equipo, Date fechaInicio, Date fechaFinal,
-                       long diasTotales, long contadorPagInicial, long contadorPagFinal,
-                       long contadorScanInicial, long contadorScanFinal, long pagAdicionales,
-                       long scanAdicionales, boolean pagoMinimo, long costoPagAdicionales,
+    public Liquidacion(Long id, Equipo equipo, long cargoBasico,Date fechaInicio, Date fechaFinal, long diasTotales,
+                       long contadorPagInicial, long contadorPagFinal, long totalPaginas,
+                       long contadorScanInicial, long contadorScanFinal, long totalScan,
+                       long pagAdicionales, long scanAdicionales, boolean pagoMinimo, long costoPagAdicionales,
                        long costoScanAdicional, long totalLiquidacion, String nota1, String nota2) {
         this.id = id;
         this.equipo = equipo;
+        this.cargoBasico=cargoBasico;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.diasTotales = diasTotales;
         this.contadorPagInicial = contadorPagInicial;
         this.contadorPagFinal = contadorPagFinal;
+        this.totalPaginas = totalPaginas;
         this.contadorScanInicial = contadorScanInicial;
         this.contadorScanFinal = contadorScanFinal;
+        this.totalScan = totalScan;
         this.pagAdicionales = pagAdicionales;
         this.scanAdicionales = scanAdicionales;
         this.pagoMinimo = pagoMinimo;
@@ -75,6 +80,14 @@ public class Liquidacion {
 
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
+    }
+
+    public long getCargoBasico() {
+        return cargoBasico;
+    }
+
+    public void setCargoBasico(long cargoBasico) {
+        this.cargoBasico = cargoBasico;
     }
 
     public Date getFechaInicio() {
@@ -195,5 +208,21 @@ public class Liquidacion {
 
     public void setNota2(String nota2) {
         this.nota2 = nota2;
+    }
+
+    public long getTotalPaginas() {
+        return totalPaginas;
+    }
+
+    public void setTotalPaginas(long totalPaginas) {
+        this.totalPaginas = totalPaginas;
+    }
+
+    public long getTotalScan() {
+        return totalScan;
+    }
+
+    public void setTotalScan(long totalScan) {
+        this.totalScan = totalScan;
     }
 }

@@ -22,27 +22,33 @@ public class Evento {
     //@DateTimeFormat (pattern = "yyyy-MM-dd")
     private Date fechaEvento;
     private Long contadorTotal;
+    private Long contadorScan;
 
     private Long tipoEvento; //1: Toma contadores 2: Otro
 
     private String detalle;
+    private boolean chargeScan;
 
     public Evento() {
     }
 
-    public Evento(Long id, Equipo equipo, Date fechaEvento, Long contadorTotal, Long tipoEvento, String detalle) {
+    public Evento(Long id, Equipo equipo, Date fechaEvento, Long contadorTotal, Long contadorScan, Long tipoEvento, String detalle, boolean chargeScan) {
         this.id = id;
         this.equipo = equipo;
         this.fechaEvento = fechaEvento;
         this.contadorTotal = contadorTotal;
+        this.contadorScan=contadorScan;
         this.tipoEvento = tipoEvento;
         this.detalle = detalle;
+        this.chargeScan=chargeScan;
     }
-    public Evento( Date fechaEvento, Long contadorTotal, Long tipoEvento, String detalle) {
+    public Evento( Date fechaEvento, Long contadorTotal, Long contadorScan, Long tipoEvento, String detalle,boolean chargeScan) {
         this.fechaEvento = fechaEvento;
         this.contadorTotal = contadorTotal;
+        this.contadorScan=contadorScan;
         this.tipoEvento = tipoEvento;
         this.detalle = detalle;
+        this.chargeScan=chargeScan;
     }
 
     public Evento(DatosRegistroEvento datosRegistroEvento) {
@@ -56,8 +62,10 @@ public class Evento {
         }
         //this.fechaEvento = datosRegistroEvento.fechaEvento();
         this.contadorTotal = datosRegistroEvento.contadorTotal();
+        this.contadorScan=datosRegistroEvento.contadorScan();
         this.tipoEvento = datosRegistroEvento.tipoEvento();
         this.detalle = datosRegistroEvento.detalle();
+        this.chargeScan=datosRegistroEvento.chargeScan();
     }
 
     public Long getId() {
@@ -92,6 +100,14 @@ public class Evento {
         this.contadorTotal = contadorTotal;
     }
 
+    public Long getContadorScan() {
+        return contadorScan;
+    }
+
+    public void setContadorScan(Long contadorScan) {
+        this.contadorScan = contadorScan;
+    }
+
     public Long getTipoEvento() {
         return tipoEvento;
     }
@@ -106,5 +122,13 @@ public class Evento {
 
     public void setDetalle(String detalle) {
         this.detalle = detalle;
+    }
+
+    public boolean isChargeScan() {
+        return chargeScan;
+    }
+
+    public void setChargeScan(boolean chargeScan) {
+        this.chargeScan = chargeScan;
     }
 }

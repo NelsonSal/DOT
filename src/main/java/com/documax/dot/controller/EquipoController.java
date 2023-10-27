@@ -50,7 +50,7 @@ public class EquipoController {
     public String mostrarFormaNuevoEquipo (Model model){
        Equipo equipoNew = new Equipo();
         model.addAttribute("equipo",equipoNew);
-        return "nuevoEquipoForm";
+        return "newEquipoForm";
     }
     @PostMapping("/guardarEquipo")
     public String guardarEquipo(@ModelAttribute ("equipo") DatosAgregarEquipo datosAgregarEquipo){
@@ -72,6 +72,7 @@ public class EquipoController {
         evento.setTipoEvento(1l);
         evento.setDetalle("Creación en el sistema");
         evento.setContadorTotal(0l);
+        evento.setContadorScan(0l);
         eventoRepository.save(evento);
 
         return "redirect:/listadoEquipos";

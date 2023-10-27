@@ -45,7 +45,7 @@
                         <td>   </td> <td th:text="${contrato.costoPagina}"></td></tr>
                     <tr><th>$xPágAdicional</th>
                         <td>   </td>  <td th:text="${contrato.costoPaginaAdicional}"></td></tr>
-                    <tr><th>$xScan</th>
+                    <tr><th>SCAN Incluidos</th>
                         <td>   </td>  <td th:text="${contrato.cupoScan}"></td></tr>
                     <tr><th>$xScanAdicional</th>
                         <td>   </td>  <td th:text="${contrato.costoScanAdicional}"></td></tr>
@@ -65,7 +65,11 @@
                         <tr><th>FECHA  </th>
                             <td th:text="${#dates.format (ultimoEvento.fechaEvento, 'dd/MM/yyyy')}"></td><td> <input type="date" th:field="*{fechaEvento}" placeholder="Fecha dd/MM/yyyy" >  </td></tr>
                         <tr><th>PAGINAS</th>
-                            <td th:text="${ultimoEvento.contadorTotal}" ></td> <td> <input type="text" th:field="*{contadorTotal}" placeholder="Contador" ></td></tr>
+                            <td th:text="${ultimoEvento.contadorTotal}" ></td> <td> <input type="text" th:field="*{contadorTotal}" placeholder="Contador" ></td>
+                            <td><input type="checkbox" name="mycheckbox" th:field="*{chargeScan}" th:checked="${flag} ? 'checked'"> Facturar Scan</td></tr>
+                        <tr><th>SCAN</th>
+                            <td th:text="${ultimoEvento.contadorScan}" ></td> <td> <input type="text" th:field="*{contadorScan}" placeholder="Scan" ></td></tr>
+
                         <tr><th>TIPO EVENTO</th>
                             <td>   </td>  <td> <input type="text" th:field="*{tipoEvento}" placeholder="Tipo Evento" ></td></tr>
                         <tr><th>DETALLE</th>
