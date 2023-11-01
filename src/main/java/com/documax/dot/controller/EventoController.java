@@ -52,7 +52,7 @@ public class EventoController {
 
     @GetMapping("/listadoEventos")
     public String listadoEventos(Model model){
-        List<DatosListadoEventos> listaEventos= eventoRepository.findAll().stream().map(DatosListadoEventos::new).toList();
+        List<DatosListadoEventos> listaEventos= eventoRepository.findAllByOrderByIdDesc().stream().map(DatosListadoEventos::new).toList();
         model.addAttribute("listaEventos",listaEventos);
         return "listaEventos";
     }

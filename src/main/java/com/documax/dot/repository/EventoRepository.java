@@ -4,6 +4,7 @@ import com.documax.dot.domain.evento.Evento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface EventoRepository extends JpaRepository<Evento, Long> {
@@ -14,5 +15,11 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
              nativeQuery = true)
 
      List<Evento> buscar(Long id);
+
+     List<Evento> findAllByOrderByIdDesc();
+
+
      //Para lograr esta consulta primero la ensaye en Workbench pues la consulta SQL pura es diferente
+
+    
 }
