@@ -17,15 +17,10 @@ public class Liquidacion {
 
     @OneToOne
     private Equipo equipo;
-    private long cargoBasico;
-    private Date fechaInicio;
-    private Date fechaFinal;
+    private long idEventoAnt;
+    private long idEventoAct;
     private long diasTotales;
-    private long contadorPagInicial;
-    private long contadorPagFinal;
     private long totalPaginas;
-    private long contadorScanInicial;
-    private long contadorScanFinal;
     private long totalScan;
     private long pagAdicionales;
     private long scanAdicionales;
@@ -39,22 +34,15 @@ public class Liquidacion {
     public Liquidacion() {
     }
 
-    public Liquidacion(Long id, Equipo equipo, long cargoBasico,Date fechaInicio, Date fechaFinal, long diasTotales,
-                       long contadorPagInicial, long contadorPagFinal, long totalPaginas,
-                       long contadorScanInicial, long contadorScanFinal, long totalScan,
-                       long pagAdicionales, long scanAdicionales, boolean pagoMinimo, long costoPagAdicionales,
-                       long costoScanAdicional, long totalLiquidacion, String nota1, String nota2) {
+    public Liquidacion(Long id, Equipo equipo, long idEventoAnt, long idEventoAct, long diasTotales,
+                       long totalPaginas, long totalScan, long pagAdicionales, long scanAdicionales, boolean pagoMinimo,
+                       long costoPagAdicionales, long costoScanAdicional, long totalLiquidacion, String nota1, String nota2) {
         this.id = id;
         this.equipo = equipo;
-        this.cargoBasico=cargoBasico;
-        this.fechaInicio = fechaInicio;
-        this.fechaFinal = fechaFinal;
+        this.idEventoAnt = idEventoAnt;
+        this.idEventoAct = idEventoAct;
         this.diasTotales = diasTotales;
-        this.contadorPagInicial = contadorPagInicial;
-        this.contadorPagFinal = contadorPagFinal;
         this.totalPaginas = totalPaginas;
-        this.contadorScanInicial = contadorScanInicial;
-        this.contadorScanFinal = contadorScanFinal;
         this.totalScan = totalScan;
         this.pagAdicionales = pagAdicionales;
         this.scanAdicionales = scanAdicionales;
@@ -82,28 +70,20 @@ public class Liquidacion {
         this.equipo = equipo;
     }
 
-    public long getCargoBasico() {
-        return cargoBasico;
+    public long getIdEventoAnt() {
+        return idEventoAnt;
     }
 
-    public void setCargoBasico(long cargoBasico) {
-        this.cargoBasico = cargoBasico;
+    public void setIdEventoAnt(long idEventoAnt) {
+        this.idEventoAnt = idEventoAnt;
     }
 
-    public Date getFechaInicio() {
-        return fechaInicio;
+    public long getIdEventoAct() {
+        return idEventoAct;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public Date getFechaFinal() {
-        return fechaFinal;
-    }
-
-    public void setFechaFinal(Date fechaFinal) {
-        this.fechaFinal = fechaFinal;
+    public void setIdEventoAct(long idEventoAct) {
+        this.idEventoAct = idEventoAct;
     }
 
     public long getDiasTotales() {
@@ -114,36 +94,20 @@ public class Liquidacion {
         this.diasTotales = diasTotales;
     }
 
-    public long getContadorPagInicial() {
-        return contadorPagInicial;
+    public long getTotalPaginas() {
+        return totalPaginas;
     }
 
-    public void setContadorPagInicial(long contadorPagInicial) {
-        this.contadorPagInicial = contadorPagInicial;
+    public void setTotalPaginas(long totalPaginas) {
+        this.totalPaginas = totalPaginas;
     }
 
-    public long getContadorPagFinal() {
-        return contadorPagFinal;
+    public long getTotalScan() {
+        return totalScan;
     }
 
-    public void setContadorPagFinal(long contadorPagFinal) {
-        this.contadorPagFinal = contadorPagFinal;
-    }
-
-    public long getContadorScanInicial() {
-        return contadorScanInicial;
-    }
-
-    public void setContadorScanInicial(long contadorScanInicial) {
-        this.contadorScanInicial = contadorScanInicial;
-    }
-
-    public long getContadorScanFinal() {
-        return contadorScanFinal;
-    }
-
-    public void setContadorScanFinal(long contadorScanFinal) {
-        this.contadorScanFinal = contadorScanFinal;
+    public void setTotalScan(long totalScan) {
+        this.totalScan = totalScan;
     }
 
     public long getPagAdicionales() {
@@ -208,21 +172,5 @@ public class Liquidacion {
 
     public void setNota2(String nota2) {
         this.nota2 = nota2;
-    }
-
-    public long getTotalPaginas() {
-        return totalPaginas;
-    }
-
-    public void setTotalPaginas(long totalPaginas) {
-        this.totalPaginas = totalPaginas;
-    }
-
-    public long getTotalScan() {
-        return totalScan;
-    }
-
-    public void setTotalScan(long totalScan) {
-        this.totalScan = totalScan;
     }
 }

@@ -49,8 +49,8 @@
                         <TD>   </TD>  <td th:text="${contrato.cupoScan}"></td></TR>
                     <TR><TH>$xScanAdicional</TH>
                         <TD>   </TD>  <td th:text="${contrato.costoScanAdicional}"></td></TR>
-                    <TR><TH>Head3</TH>
-                        <TD>   </TD>  <TD>Item 9</TD></TR>
+                    <tr><th>Cargo Básico $</th>
+                        <td>   </td>  <td th:text="${contrato.cargoBasico}"></td></tr>
                 </TABLE>
             </div>
         </div>
@@ -67,15 +67,19 @@
                         <TR><TH>PAGINAS</TH>
                             <td th:text="${ultimoEvento.contadorTotal}" ></td><td th:text="${actualEvento.contadorTotal}" ></td> <td th:text="${liquidacion.totalPaginas}" ></td>  </TR>
                         <TR><TH>PAGINAS INCLUIDAS</TH>
-                            <td th:text="${contrato.cupoPaginas}" ></td>  <td th:text="${contrato.costoPagina}" ></td><td th:text="${liquidacion.cargoBasico}" ></td></TR>
+                            <td th:text="${contrato.cupoPaginas}" ></td>  <td th:text="${contrato.costoPagina}" ></td><td th:text="${contrato.cargoBasico}" ></td></TR>
                         <TR><TH>PAGINAS ADICIONALES</TH>
                             <td th:text="${liquidacion.getPagAdicionales()}" >  <td th:text="${contrato.costoPaginaAdicional}" ></td>  <td th:text="${liquidacion.costoPagAdicionales}"> </td> </TR>
                         <TR><TH>SCAN</TH>
                             <td th:text="${ultimoEvento.contadorScan}" ></td><td th:text="${actualEvento.contadorScan}" ></td> <td th:text="${liquidacion.totalScan}" ></td>  </TR>
                         <TR><TH>SCAN ADICIONALES</TH>
                             <td th:text="${liquidacion.scanAdicionales}" >  <td th:text="${contrato.costoScanAdicional}" ></td>  <td th:text="${liquidacion.costoScanAdicional}"> </td> </TR>
+                        <TR><TH>TOTAL A PAGAR</TH>
+                            <td> </td> <td></td>  <td th:text="${liquidacion.getTotalLiquidacion()}"> </td>
                         <TR><TH>NOTA 1</TH>
                             <TD>   </TD>   <td th:text="${liquidacion.nota1}" ></TR>
+                        <TR><TH>NOTA 2</TH>
+                            <TD>   </TD>   <td th:text="${liquidacion.nota2}" ></TR>
                     </TABLE>
                       <button type="submit">Guardar Evento</button>
                 </form>

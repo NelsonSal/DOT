@@ -25,30 +25,36 @@
             <thead>
             <th>TC</th>
             <th>ID</th>
-            <th>Ref Contrato</th>
-            <th>Fecha</th>
             <th>Cliente</th>
             <th>Modelo</th>
+            <th>Departamento</th>
+            <th>IP</th>
             <th>Páginas</th>
             <th>CxP</th>
             <th>CxP+</th>
             <th>Scan</th>
             <th>CxS+</th>
+            <th>Cargo Básico</th>
+            <th>Ref Contrato</th>
+            <th>Fecha</th>
             <th>Detalle</th>
             </thead>
             <tbody>
             <tr th:each="contrato : ${listaContratos} ">
                 <td><a th:href="@{/buscarUltimaLectura/{id}(id=${contrato.id1})}">TC</a></td>
                 <td th:text="${contrato.id}"></td>
-                <td th:text="${contrato.refContrato}"></td>
-                <td th:text="${#dates.format (contrato.fechaContrato, 'dd/MM/yyyy')}"></td>
                 <td th:text="${contrato.cliente}"></td>
                 <td th:text="${contrato.equipo}"></td>
+                <td th:text="${contrato.departamento}"></td>
+                <td th:text="${contrato.ipadd}"></td>
                 <td th:text="${contrato.cupoPaginas}"></td>
                 <td th:text="${contrato.costoPagina}"></td>
                 <td th:text="${contrato.costoPaginaAdicional}"></td>
                 <td th:text="${contrato.cupoScan}"></td>
                 <td th:text="${contrato.costoScanAdicional}"></td>
+                <td th:text="${contrato.cargoBasico}"></td>
+                <td th:text="${contrato.refContrato}"></td>
+                <td th:text="${#dates.format (contrato.fechaContrato, 'dd/MM/yyyy')}"></td>
                 <td th:text="${contrato.detalles}"></td>
 
             </tr>

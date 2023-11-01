@@ -16,14 +16,18 @@ public record DatosListadoContratos(
         Long costoPaginaAdicional,
         Long cupoScan,
         Long costoScanAdicional,
+        Long cargoBasico,
         String detalles,
-        String equipo
+        String equipo,
+        String departamento,
+        String ipadd
 ) {
     public DatosListadoContratos(Contrato contrato){
         this(contrato.getEquipo().getId(),contrato.getId(), contrato.getRefContrato(), contrato.getFechaContrato(),contrato.getEquipo().getCliente().getNombre(),
                 contrato.getCupoPaginas(),
                 contrato.getCostoPagina(),contrato.getCostoPaginaAdicional(),contrato.getCupoScan(),
-                contrato.getCostoScanAdicional(),contrato.getDetalles(),contrato.getEquipo().getModelo().name()
+                contrato.getCostoScanAdicional(),contrato.getCargoBasico(),contrato.getDetalles(),contrato.getEquipo().getModelo().name(),
+                contrato.getDepartamento(),contrato.getIpadd()
                 );
     }
 }

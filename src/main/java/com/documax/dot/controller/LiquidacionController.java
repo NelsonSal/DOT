@@ -33,61 +33,70 @@ public class LiquidacionController {
         //llamar las dos ultimas lecturas de contadores para ese equipo id
         List<Evento> listaEventos= eventoRepository.buscar(equipo_id);
         System.out.println(listaEventos);
-        Evento evento1 = new Evento();
-        evento1= listaEventos.get(1);
-        Evento evento0 = new Evento();
-        evento0= listaEventos.get(0);
-        System.out.println("Evento 0= "+ evento0.getContadorTotal());
-        System.out.println("Evento 1= "+ evento1.getContadorTotal());
+        Evento eventoAnterior = new Evento();
+        eventoAnterior= listaEventos.get(1);
+        Evento eventoActual = new Evento();
+        eventoActual= listaEventos.get(0);
+        System.out.println("Evento 0= "+ eventoActual.getContadorTotal());
+        System.out.println("Evento 1= "+ eventoAnterior.getContadorTotal());
         //lLAMAR DATOS DE CONTRATO
         Contrato contrato = contratoRepository.findByEquipo_id(equipo_id);
         System.out.println("Contrato traido: "+ contrato.getRefContrato());
         //calcular y asignar datos a liquidacion
         Liquidacion liquidacion = new Liquidacion();
-            //Calcular paginas Totales
-        liquidacion.setContadorPagInicial(evento1.getContadorTotal());
-        liquidacion.setContadorPagFinal(evento0.getContadorTotal());
-        liquidacion.setTotalPaginas(evento0.getContadorTotal()-evento1.getContadorTotal());
-        System.out.println("Total paginas= "+liquidacion.getTotalPaginas());
-            //Calcular numero de dias:
-        liquidacion.setFechaInicio(evento1.getFechaEvento());
-        liquidacion.setFechaFinal(evento0.getFechaEvento());
-        long fechaInicialMs = (evento1.getFechaEvento()).getTime();
-        long fechaFinalMs =(evento0.getFechaEvento()).getTime();
+               //Calcular numero de dias:
+        //liquidacion.setFechaInicio(eventoAnterior.getFechaEvento());
+        //liquidacion.setFechaFinal(eventoActual.getFechaEvento());
+        long fechaInicialMs = (eventoAnterior.getFechaEvento()).getTime();
+        long fechaFinalMs =(eventoActual.getFechaEvento()).getTime();
         long diferencia = fechaFinalMs - fechaInicialMs;
         int dias = Math.round(diferencia / (1000 * 60 * 60 * 24));
         liquidacion.setDiasTotales(dias);
         System.out.println("Numero de dias= "+liquidacion.getDiasTotales());
+            //Calcular paginas Totales
+        liquidacion.setTotalPaginas(eventoActual.getContadorTotal()-eventoAnterior.getContadorTotal());
+        System.out.println("Total paginas= "+liquidacion.getTotalPaginas());
             //Calcular scans adicionales
-        liquidacion.setTotalScan(evento0.getContadorScan()-evento1.getContadorScan());
+        liquidacion.setTotalScan(eventoActual.getContadorScan()-eventoAnterior.getContadorScan());
+        //Liquidacion----->
+        if (liquidacion.getTotalPaginas()<=contrato.getCupoPaginas()){
+           // liquidacion.setNota1("Se factura basico Mensual");
+            liquidacion.setTotalLiquidacion(contrato.getCargoBasico());
+            System.out.println("Total a Pagar es: "+liquidacion.getTotalLiquidacion());
+        }
+        else{
+            liquidacion.setPagAdicionales(liquidacion.getTotalPaginas()-contrato.getCupoPaginas());
+            liquidacion.setCostoPagAdicionales(liquidacion.getPagAdicionales()*contrato.getCostoPaginaAdicional());
+            liquidacion.setTotalLiquidacion((contrato.getCargoBasico())+liquidacion.getCostoPagAdicionales());
+        }
         if (liquidacion.getTotalScan()<= contrato.getCupoScan()){
             liquidacion.setScanAdicionales(0l);
             liquidacion.setCostoScanAdicional(0l);
         } else {
             liquidacion.setScanAdicionales(liquidacion.getTotalScan()-contrato.getCupoScan());
             liquidacion.setCostoScanAdicional(liquidacion.getScanAdicionales()*contrato.getCostoScanAdicional());
+            if (eventoActual.isChargeScan()){
+                liquidacion.setTotalLiquidacion(liquidacion.getTotalLiquidacion()+liquidacion.getCostoScanAdicional());
+            } else{
+                liquidacion.setNota2("No se facturan "+ liquidacion.getScanAdicionales()+ " Scans por $"+ liquidacion.getCostoScanAdicional());
+            }
+        }
+
+        if (liquidacion.getTotalLiquidacion()==contrato.getCargoBasico()){
+            liquidacion.setNota1("Se factura Cargo Básico Mensual");
         }
 
 
             //Calcular cargo basico segun contrato
-        liquidacion.setCargoBasico(contrato.getCostoPagina()*contrato.getCupoPaginas());
+        //liquidacion.setCargoBasico(contrato.getCostoPagina()*contrato.getCupoPaginas());
             //Si numero de paginas es menor a minimo, facturar basico. Si no, calcular paginas/costo extra
-        if (liquidacion.getTotalPaginas()<=contrato.getCupoPaginas()){
-            liquidacion.setNota1("Se factura basico Mensual");
-            liquidacion.setTotalLiquidacion(contrato.getCostoPagina()*contrato.getCupoPaginas());
-            System.out.println("Total a Pagar es: "+liquidacion.getTotalLiquidacion());
-            }
-        else{
-            liquidacion.setPagAdicionales(liquidacion.getTotalPaginas()-contrato.getCupoPaginas());
-            liquidacion.setCostoPagAdicionales(liquidacion.getPagAdicionales()*contrato.getCostoPaginaAdicional());
-            liquidacion.setTotalLiquidacion((contrato.getCostoPagina()*contrato.getCupoPaginas())+liquidacion.getCostoPagAdicionales());
-        }
+
 
 
         System.out.println("Total a Pagar es: "+liquidacion.getTotalLiquidacion());
 
-        model.addAttribute("ultimoEvento",evento1);
-        model.addAttribute("actualEvento",evento0);
+        model.addAttribute("ultimoEvento",eventoAnterior);
+        model.addAttribute("actualEvento",eventoActual);
         model.addAttribute("contrato",contrato);
         model.addAttribute("liquidacion",liquidacion);
 

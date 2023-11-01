@@ -13,7 +13,10 @@ public record DatosRegistroContrato(
          Long costoPaginaAdicional,
          Long cupoScan,
          Long costoScanAdicional,
+         Long cargoBasico,
          String detalles,
-         Equipo equipo
+         Equipo equipo,
+         String departamento,
+         String ipadd
 ) {
 }

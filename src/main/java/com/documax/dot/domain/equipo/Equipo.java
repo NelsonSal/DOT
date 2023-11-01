@@ -25,8 +25,6 @@ public class Equipo {
     @ManyToOne
     private Cliente cliente;
 
-
-
     public Equipo() {
     }
     public Equipo(DatosAgregarEquipo datosAgregarEquipo){

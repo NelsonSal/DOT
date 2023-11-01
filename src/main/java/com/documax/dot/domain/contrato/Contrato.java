@@ -24,7 +24,10 @@ public class Contrato {
     private Long costoPaginaAdicional;
     private Long cupoScan;
     private Long costoScanAdicional;
+    private Long cargoBasico;
     private String detalles;
+    private String departamento="";
+    private String ipadd="";
     @OneToOne
     private Equipo equipo;
 
@@ -32,7 +35,8 @@ public class Contrato {
     }
 
     public Contrato(Long id, String refContrato, Date fechaContrato, Long cupoPaginas,
-                    Long costoPagina, Long costoPaginaAdicional, Long cupoScan, Long costoScanAdicional, String detalles, Equipo equipo) {
+                    Long costoPagina, Long costoPaginaAdicional, Long cupoScan,
+                    Long costoScanAdicional, Long cargoBasico, String detalles, Equipo equipo, String departamento, String ipadd) {
         this.id = id;
         this.refContrato = refContrato;
         this.fechaContrato = fechaContrato;
@@ -41,8 +45,11 @@ public class Contrato {
         this.costoPaginaAdicional = costoPaginaAdicional;
         this.cupoScan = cupoScan;
         this.costoScanAdicional = costoScanAdicional;
+        this.cargoBasico=cargoBasico;
         this.detalles = detalles;
         this.equipo = equipo;
+        this.departamento=departamento;
+        this.ipadd=ipadd;
     }
 
     public Contrato(DatosRegistroContrato datosRegistroContrato) {
@@ -58,8 +65,11 @@ public class Contrato {
         this.costoPaginaAdicional = datosRegistroContrato.costoPaginaAdicional();
         this.cupoScan = datosRegistroContrato.cupoScan();
         this.costoScanAdicional = datosRegistroContrato.costoScanAdicional();
+        this.cargoBasico=datosRegistroContrato.costoPagina()*datosRegistroContrato.cupoPaginas();
         this.detalles = datosRegistroContrato.detalles();
         this.equipo = datosRegistroContrato.equipo();
+        this.departamento=datosRegistroContrato.departamento();
+        this.ipadd=datosRegistroContrato.ipadd();
     }
 
     public Long getId() {
@@ -134,11 +144,35 @@ public class Contrato {
         this.detalles = detalles;
     }
 
+    public Long getCargoBasico() {
+        return cargoBasico;
+    }
+
+    public void setCargoBasico(Long cargoBasico) {
+        this.cargoBasico = cargoBasico;
+    }
+
     public Equipo getEquipo() {
         return equipo;
     }
 
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getIpadd() {
+        return ipadd;
+    }
+
+    public void setIpadd(String ipadd) {
+        this.ipadd = ipadd;
     }
 }
