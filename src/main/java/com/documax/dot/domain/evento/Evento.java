@@ -38,7 +38,7 @@ public class Evento {
         this.fechaEvento = fechaEvento;
         this.contadorTotal = contadorTotal;
         this.contadorScan=contadorScan;
-        this.tipoEvento = tipoEvento;
+        this.tipoEvento = tipoEvento=(1l);
         this.detalle = detalle;
         this.chargeScan=chargeScan;
     }

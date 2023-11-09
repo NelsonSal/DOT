@@ -100,7 +100,7 @@ public class LiquidacionController {
         model.addAttribute("contrato",contrato);
         model.addAttribute("liquidacion",liquidacion);
 
-        return "generarReporte";
+        return "generarReporteDocu";
     }
 
 
