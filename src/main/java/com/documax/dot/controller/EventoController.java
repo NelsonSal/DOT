@@ -106,7 +106,7 @@ public class EventoController {
     public String pruebaMandarLiquidacion( long id, Model model){
         System.out.println("Entró y procesa, Equipo ID= "+id);
         //llamar las dos ultimas lecturas de contadores para ese equipo id
-        List<Evento> listaEventos= eventoRepository.buscar(id);
+        List<Evento> listaEventos= eventoRepository.buscar(id, id);
         System.out.println(listaEventos);
         Evento eventoAnterior = new Evento();
         eventoAnterior= listaEventos.get(1);

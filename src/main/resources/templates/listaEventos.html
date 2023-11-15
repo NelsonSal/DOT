@@ -46,12 +46,12 @@
                 <td th:text="${evento.contadorScan}"></td>
                 <td th:text="${evento.tipoEvento}"></td>
                 <td th:text="${evento.detalle}"></td>
-                <td><a th:href="@{/agregarLiquidacion/{id}(id=${evento.equipo_id})}">LQ</a></td>
-            </tr>
-            </tbody>
-        </table>
-        </div>
-    </div>
+                <td><a th:href="@{/agregarLiquidacion/{id}/{idE}(id=${evento.equipo_id} , idE=${evento.id}) }">LQ</a></td>
+          </tr>
+          </tbody>
+      </table>
+      </div>
+  </div>
 </div>
 
 

@@ -15,7 +15,7 @@ public class Liquidacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Equipo equipo;
     private long idEventoAnt;
     private long idEventoAct;
@@ -24,7 +24,7 @@ public class Liquidacion {
     private long totalScan;
     private long pagAdicionales;
     private long scanAdicionales;
-    private boolean pagoMinimo;
+    //private boolean pagoMinimo;
     private long costoPagAdicionales;
     private long costoScanAdicional;
     private long totalLiquidacion;
@@ -35,7 +35,7 @@ public class Liquidacion {
     }
 
     public Liquidacion(Long id, Equipo equipo, long idEventoAnt, long idEventoAct, long diasTotales,
-                       long totalPaginas, long totalScan, long pagAdicionales, long scanAdicionales, boolean pagoMinimo,
+                       long totalPaginas, long totalScan, long pagAdicionales, long scanAdicionales,
                        long costoPagAdicionales, long costoScanAdicional, long totalLiquidacion, String nota1, String nota2) {
         this.id = id;
         this.equipo = equipo;
@@ -46,7 +46,6 @@ public class Liquidacion {
         this.totalScan = totalScan;
         this.pagAdicionales = pagAdicionales;
         this.scanAdicionales = scanAdicionales;
-        this.pagoMinimo = pagoMinimo;
         this.costoPagAdicionales = costoPagAdicionales;
         this.costoScanAdicional = costoScanAdicional;
         this.totalLiquidacion = totalLiquidacion;
@@ -126,13 +125,7 @@ public class Liquidacion {
         this.scanAdicionales = scanAdicionales;
     }
 
-    public boolean isPagoMinimo() {
-        return pagoMinimo;
-    }
 
-    public void setPagoMinimo(boolean pagoMinimo) {
-        this.pagoMinimo = pagoMinimo;
-    }
 
     public long getCostoPagAdicionales() {
         return costoPagAdicionales;

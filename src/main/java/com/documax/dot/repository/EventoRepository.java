@@ -11,10 +11,10 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
      Evento findFirstByEquipo_idOrderByFechaEventoDesc(Long id);
 
-     @Query(value="SELECT * FROM eventos  WHERE eventos.equipo_id = ?1 ORDER BY eventos.fecha_evento  DESC LIMIT 2",
+     @Query(value="SELECT * FROM eventos  WHERE eventos.equipo_id = ?1 AND id<= ?2 ORDER BY eventos.fecha_evento  DESC LIMIT 2",
              nativeQuery = true)
 
-     List<Evento> buscar(Long id);
+     List<Evento> buscar(Long id, Long idE);
 
      List<Evento> findAllByOrderByIdDesc();
 

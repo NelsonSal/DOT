@@ -13,7 +13,6 @@ public record DatosRegistroLiquidacion(
          long totalScan,
          long pagAdicionales,
          long scanAdicionales,
-         boolean pagoMinimo,
          long costoPagAdicionales,
          long costoScanAdicional,
          long totalLiquidacion,

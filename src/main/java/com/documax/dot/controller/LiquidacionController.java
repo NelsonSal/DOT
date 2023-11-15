@@ -28,15 +28,13 @@ public class LiquidacionController {
     @Autowired
     private ContratoRepository contratoRepository;
 
-    @GetMapping("/agregarLiquidacion/{id}")
-    public String mostrarDatosParaLiquidacion(@PathVariable(value="id") Long equipo_id, Model model){
+    @GetMapping("/agregarLiquidacion/{id}/{idE}")
+    public String mostrarDatosParaLiquidacion(@PathVariable(value="id") Long equipo_id, @PathVariable(value="idE") Long id,Model model){
         //llamar las dos ultimas lecturas de contadores para ese equipo id
-        List<Evento> listaEventos= eventoRepository.buscar(equipo_id);
+        List<Evento> listaEventos= eventoRepository.buscar(equipo_id, id);
         System.out.println(listaEventos);
-        Evento eventoAnterior = new Evento();
-        eventoAnterior= listaEventos.get(1);
-        Evento eventoActual = new Evento();
-        eventoActual= listaEventos.get(0);
+        Evento eventoAnterior = listaEventos.get(1);
+        Evento eventoActual = listaEventos.get(0);
         System.out.println("Evento 0= "+ eventoActual.getContadorTotal());
         System.out.println("Evento 1= "+ eventoAnterior.getContadorTotal());
         //lLAMAR DATOS DE CONTRATO
@@ -94,13 +92,23 @@ public class LiquidacionController {
 
 
         System.out.println("Total a Pagar es: "+liquidacion.getTotalLiquidacion());
+        liquidacion.setIdEventoAnt(eventoAnterior.getId());
+        liquidacion.setIdEventoAct(eventoActual.getId());
+        liquidacion.setEquipo(contrato.getEquipo());
+        liquidacionRepository.save(liquidacion);
 
         model.addAttribute("ultimoEvento",eventoAnterior);
         model.addAttribute("actualEvento",eventoActual);
         model.addAttribute("contrato",contrato);
         model.addAttribute("liquidacion",liquidacion);
 
-        return "generarReporteDocu";
+        return "generarReporteHtml";
+    }
+
+    @GetMapping("/deleteLiquidacion/{id}")
+    public String deleteLiquidacion(@PathVariable (value="id") Long id, Model model){
+        liquidacionRepository.deleteById(id);
+        return "redirect:/listadoEventos";
     }
 
 
