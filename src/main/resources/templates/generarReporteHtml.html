@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/reporte.css}"/>
+    <title>REPORTE</title>
+
+</head>
+<body>
+
+        <img th:src="@{/images/Documax_logo1.jpg}" alt="logo"  />
+        <div class="container">
+        <h3>LIQUIDACION SERVICIO IMPRESORA</h3>
+        <div class="datos">
+            <div>
+                <label>Cliente:
+                <input type="text" th:value="${contrato.equipo.cliente.nombre}"  size="30" ></label><br>
+                <label>Dependencia:
+                <input type="text" th:value="${contrato.departamento}" size="12" ></label>
+            </div>
+            <div>
+                <label>Equipo:
+                <input type="text" th:value="${contrato.equipo.marca.name}" size="14" ></label><br>
+                <label>Modelo:
+                <input type="text" th:value="${contrato.equipo.modelo.name}" size="5" ></label><br>
+                <label>Serial:
+                <input type="text" th:value="${contrato.equipo.serial}" size="15" ></label>
+            </div>
+
+
+
+
+
+        </div>
+            <h4>Datos del Contrato</h4>
+        <div class="datos">
+            <div>
+                <label>Páginas Incluidas___:
+                <input type="text" th:value="${contrato.cupoPaginas}"  size="10" ></label><br>
+                <label>Costo x Página_____:
+                <input type="text" th:value="'$ '+ ${contrato.costoPagina}" size="10" ></label><br>
+                <label>Costo Pág. Adicional:
+                <input type="text" th:value="'$ '+ ${contrato.costoPaginaAdicional}" size="10" ></label><br>
+                <label>Inicio del contrato.....:
+                <input type="text" th:value="${#dates.format (contrato.fechaContrato, 'dd/MM/yyyy')}" size="10" ></label>
+
+            </div>
+
+            <div>
+                <label>Scan Incluidos:
+                <input type="text" th:value="${contrato.cupoScan}"  size="10" ></label><br>
+                <label>Costo Scan Adicional:
+                <input type="text" th:value="'$ '+ ${contrato.costoScanAdicional}" size="4" ></label><br>
+                <label>Cargo Básico:
+                <input type="text" th:value="'$ '+ ${contrato.cargoBasico}" size="10" ></label><br>
+            </div>
+
+
+        </div>
+        <br><br><br>
+        <h4>DATOS DE ESTA LIQUIDACIÓN</h4>
+        <h5>Datos de Contadores</h5>
+        <div >
+            <div class="datos">
+                <label>Fecha desde:
+                <input type="text" th:value="${#dates.format (ultimoEvento.fechaEvento, 'dd/MM/yyyy')}" size="9" ></label>
+                <label>Fecha hasta:
+                <input type="text" th:value="${#dates.format (actualEvento.fechaEvento, 'dd/MM/yyyy')}" size="9" ></label>
+                <label>Dias:
+                <input type="text" th:value="${liquidacion.diasTotales}" size="3" ></label>
+            </div> <br>
+
+            <div class="datos">
+                    <div>
+                        <label>Contador  Actual --:
+                        <input type="text" th:value="${actualEvento.contadorTotal}"  size="10" ></label><br>
+                        <label>Contador Anterior-
+                        <input type="text" th:value="${ultimoEvento.contadorTotal}" size="10" ></label><br>
+                        <label>Total  Páginas-------
+                        <input type="text" th:value="${liquidacion.totalPaginas}" size="10" ></label>
+
+                    </div>
+
+                    <div>
+                        <label>Conta Scan  Actual---
+                        <input type="text" th:value="${actualEvento.contadorScan}"  size="8" ></label><br>
+                        <label>Cont. Scan Anterior:
+                        <input type="text" th:value="${ultimoEvento.contadorScan}" size="8" ></label><br>
+                        <label>Total Scan -------------:
+                        <input type="text" th:value="${liquidacion.totalScan}" size="8" ></label><br>
+                    </div>
+                </div>
+        </div><br>
+        <div>
+            <h5>Valores Liquidación</h5>
+            <div class="datos">
+                <div>
+                    <label>Paginas Incluidas......
+                    <input type="text" th:value="${contrato.cupoPaginas}"  size="4" ></label><br>
+                    <label>Paginas Adicionales:
+                    <input type="text" th:value="${liquidacion.getPagAdicionales()}" size="4" ></label><br>
+                    <label>Scan Adicionales:.....
+                    <input type="text" th:value="${liquidacion.scanAdicionales}" size="4" ></label><br>
+
+                </div>
+
+                <div>
+                    <label>$ x c/u
+                    <input type="text" th:value="'$ '+ ${contrato.costoPagina}"  size="3" ></label><br>
+                    <label>$ x c/u
+                    <input type="text" th:value="'$ '+ ${contrato.costoPaginaAdicional}" size="3" ></label><br>
+                    <label>$ x c/u
+                    <input type="text" th:value="'$ '+ ${contrato.costoScanAdicional}" size="3" ></label><br>
+                </div>
+                <div>
+                    <label>= valor:
+                    <input type="text" th:value="'$ '+ ${contrato.cargoBasico}"  size="8" ></label><br>
+                    <label>= valor:
+                    <input type="text" th:value="'$ '+ ${liquidacion.costoPagAdicionales}" size="8" ></label><br>
+                    <label>= valor:
+                    <input type="text" th:value="'$ '+ ${liquidacion.costoScanAdicional}" size="8" ></label><br>
+                </div>
+            </div>
+
+        </div><br>
+        <div>
+            <h5>Notas y Valor final a Facturar</h5>
+            <div class="datos">
+                <div >
+                    <label>+++
+                    <input type="text"  size="31" value="Los valores indicados no Incluyen IVA" ></label><br>
+                    <label>+++
+                    <input type="text" th:value="${liquidacion.nota1}"  size="31" ></label><br>
+                    <label>+++
+                    <input type="text" th:value="${liquidacion.nota2}" size="31" ></label><br>
+                    <label>+++
+                    <input type="text"  size="31" ></label><br>
+
+
+                </div>
+                <div >
+                    <label>FACTURAR
+                    <input type="text" th:value="'$ '+ ${liquidacion.getTotalLiquidacion()}" size="8" ></label><br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+        <a th:href="@{/deleteLiquidacion/{id}(id=${liquidacion.id})}" >del</a>
+
+
+
+
+
+
+</body>
+
+</html>
