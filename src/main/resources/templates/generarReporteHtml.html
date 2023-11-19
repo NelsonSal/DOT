@@ -153,9 +153,19 @@
     </div>
 
 
+    <div class="datos">
+        <a th:href="@{/deleteLiquidacion/{id}(id=${liquidacion.id})}" >
+            <button class="myButton">Delete</button>
+        </a>
+
+        <a th:href="@{/listadoContratos}" >
+            <button class="myButton">Contratos</button>
+        </a>
 
 
-        <a th:href="@{/deleteLiquidacion/{id}(id=${liquidacion.id})}" >del</a>
+    </div>
+
+
 
 
 

@@ -11,6 +11,7 @@ import com.documax.dot.domain.liquidacion.Liquidacion;
 import com.documax.dot.repository.ContratoRepository;
 import com.documax.dot.repository.EquipoRepository;
 import com.documax.dot.repository.EventoRepository;
+import com.documax.dot.repository.LiquidacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,8 @@ public class EventoController {
     private EquipoRepository equipoRepository;
     @Autowired
     private ContratoRepository contratoRepository;
+    @Autowired
+    private LiquidacionRepository liquidacionRepository;
 
     @GetMapping("/agregarEvento")
     public String mostrarFormNewEvento(Model model){
@@ -44,19 +47,99 @@ public class EventoController {
     }
 
     @PostMapping("/guardarEvento")
-    public String guardaNewEvento(@ModelAttribute("newEvento")DatosRegistroEvento datosRegistroEvento) throws ParseException {
+    public String prueba2 (@ModelAttribute("newEvento")DatosRegistroEvento datosRegistroEvento, Model model) throws ParseException {
         System.out.println("fecha desde formulario= "+datosRegistroEvento.fechaEvento());
         System.out.println(datosRegistroEvento);
-        eventoRepository.save(new Evento(datosRegistroEvento));
+        Evento evento = new Evento(datosRegistroEvento);
+        eventoRepository.save(evento);
+        eventoRepository.flush();
+        long id= evento.getId(); //id del evento recien creado
+        Long equipo_id=datosRegistroEvento.equipo().getId(); //id del equipo
+
+        System.out.println("ultimo evento id=" + id);
+        List<Evento> listaEventos= eventoRepository.buscar(equipo_id, id);
+        System.out.println(listaEventos);
+        Evento eventoAnterior = listaEventos.get(1);
+        Evento eventoActual = listaEventos.get(0);
+        System.out.println("Evento 0= "+ eventoActual.getContadorTotal());
+        System.out.println("Evento 1= "+ eventoAnterior.getContadorTotal());
+        //lLAMAR DATOS DE CONTRATO
+        Contrato contrato = contratoRepository.findByEquipo_id(equipo_id);
+        System.out.println("Contrato traido: "+ contrato.getRefContrato());
+        //calcular y asignar datos a liquidacion
+        Liquidacion liquidacion = new Liquidacion();
+        //Calcular numero de dias:
+        //liquidacion.setFechaInicio(eventoAnterior.getFechaEvento());
+        //liquidacion.setFechaFinal(eventoActual.getFechaEvento());
+        long fechaInicialMs = (eventoAnterior.getFechaEvento()).getTime();
+        long fechaFinalMs =(eventoActual.getFechaEvento()).getTime();
+        long diferencia = fechaFinalMs - fechaInicialMs;
+        int dias = Math.round(diferencia / (1000 * 60 * 60 * 24));
+        liquidacion.setDiasTotales(dias);
+        System.out.println("Numero de dias= "+liquidacion.getDiasTotales());
+        //Calcular paginas Totales
+        liquidacion.setTotalPaginas(eventoActual.getContadorTotal()-eventoAnterior.getContadorTotal());
+        System.out.println("Total paginas= "+liquidacion.getTotalPaginas());
+        //Calcular scans adicionales
+        liquidacion.setTotalScan(eventoActual.getContadorScan()-eventoAnterior.getContadorScan());
+        //Liquidacion----->
+        if (liquidacion.getTotalPaginas()<=contrato.getCupoPaginas()){
+            // liquidacion.setNota1("Se factura basico Mensual");
+            liquidacion.setTotalLiquidacion(contrato.getCargoBasico());
+            System.out.println("Total a Pagar es: "+liquidacion.getTotalLiquidacion());
+        }
+        else{
+            liquidacion.setPagAdicionales(liquidacion.getTotalPaginas()-contrato.getCupoPaginas());
+            liquidacion.setCostoPagAdicionales(liquidacion.getPagAdicionales()*contrato.getCostoPaginaAdicional());
+            liquidacion.setTotalLiquidacion((contrato.getCargoBasico())+liquidacion.getCostoPagAdicionales());
+        }
+        if (liquidacion.getTotalScan()<= contrato.getCupoScan()){
+            liquidacion.setScanAdicionales(0l);
+            liquidacion.setCostoScanAdicional(0l);
+        } else {
+            liquidacion.setScanAdicionales(liquidacion.getTotalScan()-contrato.getCupoScan());
+            liquidacion.setCostoScanAdicional(liquidacion.getScanAdicionales()*contrato.getCostoScanAdicional());
+            if (eventoActual.isChargeScan()){
+                liquidacion.setTotalLiquidacion(liquidacion.getTotalLiquidacion()+liquidacion.getCostoScanAdicional());
+            } else{
+                liquidacion.setNota2("No se facturan "+ liquidacion.getScanAdicionales()+ " Scans por $"+ liquidacion.getCostoScanAdicional());
+            }
+        }
+
+        if (liquidacion.getTotalLiquidacion()==contrato.getCargoBasico()){
+            liquidacion.setNota1("Se factura Cargo Básico Mensual");
+        }
+
+
+        //Calcular cargo basico segun contrato
+        //liquidacion.setCargoBasico(contrato.getCostoPagina()*contrato.getCupoPaginas());
+        //Si numero de paginas es menor a minimo, facturar basico. Si no, calcular paginas/costo extra
+
+
+
+        System.out.println("Total a Pagar es: "+liquidacion.getTotalLiquidacion());
+        liquidacion.setIdEventoAnt(eventoAnterior.getId());
+        liquidacion.setIdEventoAct(eventoActual.getId());
+        liquidacion.setEquipo(contrato.getEquipo());
+        liquidacionRepository.save(liquidacion);
+
+        model.addAttribute("ultimoEvento",eventoAnterior);
+        model.addAttribute("actualEvento",eventoActual);
+        model.addAttribute("contrato",contrato);
+        model.addAttribute("liquidacion",liquidacion);
+
+        return "generarReporteHtml";
         //acá podria mandar a hacer la liquidacion en lugar de mostrar el listado de eventos.
         //tocaria llamar al contrato (Metodo?) , y buscar la lectura anterior a la actual.
         //lO VOY A INTENTAR CON UN METODO ACÁ.....
        // pruebaMandarLiquidacion(datosRegistroEvento.equipo().getId()); //= NO funka
         //Probar mandando a metodo en Liquidacion
-        //Long id=datosRegistroEvento.equipo().getId();
-        //System.out.println("supuesto id=" + id);
-        //return "redirect:/agregarLiquidacion/{id}";
-        return "redirect:/listadoEventos";
+
+        //System.out.println("supuesto id=" + equipo_id);
+        //prueba2(equipo_id);//<---Funka con void
+        //return "redirect:/listadoEventos"; //Original <------
+        //return "forward:/agregarLiquidacion/id/idE";
+
     }
 
     @GetMapping("/listadoEventos")
@@ -103,10 +186,11 @@ public class EventoController {
         return "redirect:/listadoEventos";
     }
 
-    public String pruebaMandarLiquidacion( long id, Model model){
-        System.out.println("Entró y procesa, Equipo ID= "+id);
+    @GetMapping("/prueba")
+    public String prueba(@PathVariable (value="id") Long equipo_id){
+        System.out.println("EntróLoca y procesa, Equipo ID= "+equipo_id);
         //llamar las dos ultimas lecturas de contadores para ese equipo id
-        List<Evento> listaEventos= eventoRepository.buscar(id, id);
+        List<Evento> listaEventos= eventoRepository.buscar(equipo_id,equipo_id);
         System.out.println(listaEventos);
         Evento eventoAnterior = new Evento();
         eventoAnterior= listaEventos.get(1);
@@ -115,7 +199,7 @@ public class EventoController {
         System.out.println("Evento 0= "+ eventoActual.getContadorTotal());
         System.out.println("Evento 1= "+ eventoAnterior.getContadorTotal());
         //lLAMAR DATOS DE CONTRATO
-        Contrato contrato = contratoRepository.findByEquipo_id(id);
+        Contrato contrato = contratoRepository.findByEquipo_id(equipo_id);
         System.out.println("Contrato traido: "+ contrato.getRefContrato());
         //calcular y asignar datos a liquidacion
         Liquidacion liquidacion = new Liquidacion();
@@ -170,13 +254,26 @@ public class EventoController {
 
         System.out.println("Total a Pagar es: "+liquidacion.getTotalLiquidacion());
 
-        model.addAttribute("ultimoEvento",eventoAnterior);
-        model.addAttribute("actualEvento",eventoActual);
-        model.addAttribute("contrato",contrato);
-        model.addAttribute("liquidacion",liquidacion);
+
 
         return "generarReporte";
     }
 
+
+    public void prueba2( Long equipo_id){
+        System.out.println("entróNO JODA");
+        Evento evento = eventoRepository.findFirstByEquipo_idOrderByFechaEventoDesc(equipo_id);
+        System.out.println("Contador traido= "+evento.getContadorTotal()+" en la fecha= "+evento.getFechaEvento());
+        System.out.println("Cliente traido= "+evento.getEquipo().getCliente().getNombre()+" en la fecha= "+evento.getFechaEvento());
+        //model.addAttribute("ultimoEvento",evento);
+        //TODO Traer detalles del contrato para mostrar y (calcular liquidación?)
+        Contrato contrato = contratoRepository.findByEquipo_id(equipo_id);
+        System.out.println("Contrato traido: "+ contrato.getRefContrato());
+        //model.addAttribute("contrato",contrato);
+        Evento nuevoEvento= new Evento();
+        //model.addAttribute("newEvento", nuevoEvento);
+
+
+    }
 
 }
