@@ -17,6 +17,6 @@ public record DatosRegistroContrato(
          String detalles,
          Equipo equipo,
          String departamento,
-         String ipadd
+         String ipAddr
 ) {
 }

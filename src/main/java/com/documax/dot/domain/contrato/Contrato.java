@@ -27,7 +27,7 @@ public class Contrato {
     private Long cargoBasico;
     private String detalles;
     private String departamento="";
-    private String ipadd="";
+    private String ipAddr="";
     @OneToOne
     private Equipo equipo;
 
@@ -36,7 +36,7 @@ public class Contrato {
 
     public Contrato(Long id, String refContrato, Date fechaContrato, Long cupoPaginas,
                     Long costoPagina, Long costoPaginaAdicional, Long cupoScan,
-                    Long costoScanAdicional, Long cargoBasico, String detalles, Equipo equipo, String departamento, String ipadd) {
+                    Long costoScanAdicional, Long cargoBasico, String detalles, Equipo equipo, String departamento, String ipAddr) {
         this.id = id;
         this.refContrato = refContrato;
         this.fechaContrato = fechaContrato;
@@ -49,7 +49,7 @@ public class Contrato {
         this.detalles = detalles;
         this.equipo = equipo;
         this.departamento=departamento;
-        this.ipadd=ipadd;
+        this.ipAddr=ipAddr;
     }
 
     public Contrato(DatosRegistroContrato datosRegistroContrato) {
@@ -69,7 +69,7 @@ public class Contrato {
         this.detalles = datosRegistroContrato.detalles();
         this.equipo = datosRegistroContrato.equipo();
         this.departamento=datosRegistroContrato.departamento();
-        this.ipadd=datosRegistroContrato.ipadd();
+        this.ipAddr=datosRegistroContrato.ipAddr();
     }
 
     public Long getId() {
@@ -168,11 +168,11 @@ public class Contrato {
         this.departamento = departamento;
     }
 
-    public String getIpadd() {
-        return ipadd;
+    public String getIpAddr() {
+        return ipAddr;
     }
 
-    public void setIpadd(String ipadd) {
-        this.ipadd = ipadd;
+    public void setIpAddr(String ipAddr) {
+        this.ipAddr = ipAddr;
     }
 }

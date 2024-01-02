@@ -32,8 +32,8 @@ public class ClienteController {
     }
 
 
-    @PostMapping("/agregarCliente")
-    public String registarCliente(@ModelAttribute ("cliente") DatosRegistroCliente datosRegistroCliente) {
+    @PostMapping("/guardarCliente")
+    public String guardarCliente(@ModelAttribute ("cliente") DatosRegistroCliente datosRegistroCliente) {
         clienteRepository.save(new Cliente(datosRegistroCliente));
         return "redirect:/listadoClientes";
     }

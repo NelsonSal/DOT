@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-//@RestController
-//@RequestMapping("/equipos")
 @Controller
-//@RequestMapping
 public class EquipoController {
 
     @Autowired
@@ -36,10 +33,7 @@ public class EquipoController {
 //        this.equipoRepository=equipoRepository;
 //    }
 
-//    @GetMapping
-//    public List<DatosListadoEquipos> listarEquipos(){
-//        return equipoRepository.findAll().stream().map(DatosListadoEquipos::new).toList();
-//    }
+
     @GetMapping("/listadoEquipos")
     public String verListadoEquipos(Model model){
         List<DatosListadoEquipos> list = equipoRepository.findAll().stream().map(DatosListadoEquipos::new).toList();
@@ -69,7 +63,7 @@ public class EquipoController {
         evento.setEquipo(equipo);
         Date date = new Date();
         evento.setFechaEvento(date);
-        evento.setTipoEvento(1l);
+        evento.setTomaContador(true);
         evento.setDetalle("Creación en el sistema");
         evento.setContadorTotal(0l);
         evento.setContadorScan(0l);

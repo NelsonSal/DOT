@@ -11,7 +11,6 @@ public record DatosRegistroEvento(
         String fechaEvento,
         Long contadorTotal,
         Long contadorScan,
-        Long tipoEvento,
         String detalle,
         boolean chargeScan) {
 }

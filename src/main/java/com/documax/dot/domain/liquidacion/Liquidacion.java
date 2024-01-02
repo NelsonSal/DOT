@@ -24,7 +24,6 @@ public class Liquidacion {
     private long totalScan;
     private long pagAdicionales;
     private long scanAdicionales;
-    //private boolean pagoMinimo;
     private long costoPagAdicionales;
     private long costoScanAdicional;
     private long totalLiquidacion;

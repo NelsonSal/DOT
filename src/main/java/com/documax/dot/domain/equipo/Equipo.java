@@ -32,15 +32,9 @@ public class Equipo {
         this.marca=datosAgregarEquipo.marca();
         this.modelo=datosAgregarEquipo.modelo();
         this.cliente=datosAgregarEquipo.cliente();
-        //this.contrato=datosAgregarEquipo.contrato();
 
 
     }
-
-//    private Cliente clienteIni() {
-//        Cliente cliente = new Cliente(1l);
-//        return cliente;
-//    }
 
     public Equipo(Long id, String serial, Marca marca, Modelo modelo, Cliente cliente) {
         this.id = id;

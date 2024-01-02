@@ -20,14 +20,14 @@ public record DatosListadoContratos(
         String detalles,
         String equipo,
         String departamento,
-        String ipadd
+        String ipAddr
 ) {
     public DatosListadoContratos(Contrato contrato){
         this(contrato.getEquipo().getId(),contrato.getId(), contrato.getRefContrato(), contrato.getFechaContrato(),contrato.getEquipo().getCliente().getNombre(),
                 contrato.getCupoPaginas(),
                 contrato.getCostoPagina(),contrato.getCostoPaginaAdicional(),contrato.getCupoScan(),
                 contrato.getCostoScanAdicional(),contrato.getCargoBasico(),contrato.getDetalles(),contrato.getEquipo().getModelo().name(),
-                contrato.getDepartamento(),contrato.getIpadd()
+                contrato.getDepartamento(),contrato.getIpAddr()
                 );
     }
 }

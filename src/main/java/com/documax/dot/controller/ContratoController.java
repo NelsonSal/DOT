@@ -27,8 +27,6 @@ public class ContratoController {
     }
     @PostMapping("/guardarContrato")
     public String guardarNewContrato(@ModelAttribute ("newContrato")DatosRegistroContrato datosRegistroContrato){
-
-        //datosRegistroContrato.cargoBasico()= datosRegistroContrato.costoPagina()*datosRegistroContrato.cupoPaginas();
         contratoRepository.save(new Contrato(datosRegistroContrato));
         return "redirect:/listadoContratos";
     }

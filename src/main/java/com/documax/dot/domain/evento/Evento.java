@@ -24,7 +24,7 @@ public class Evento {
     private Long contadorTotal;
     private Long contadorScan;
 
-    private Long tipoEvento; //1: Toma contadores 2: Otro
+    private boolean tomaContador;
 
     private String detalle;
     private boolean chargeScan;
@@ -32,27 +32,26 @@ public class Evento {
     public Evento() {
     }
 
-    public Evento(Long id, Equipo equipo, Date fechaEvento, Long contadorTotal, Long contadorScan, Long tipoEvento, String detalle, boolean chargeScan) {
+    public Evento(Long id, Equipo equipo, Date fechaEvento, Long contadorTotal, Long contadorScan, boolean tomaContador, String detalle, boolean chargeScan) {
         this.id = id;
         this.equipo = equipo;
         this.fechaEvento = fechaEvento;
         this.contadorTotal = contadorTotal;
         this.contadorScan=contadorScan;
-        this.tipoEvento = tipoEvento=(1l);
+        this.tomaContador = tomaContador;
         this.detalle = detalle;
         this.chargeScan=chargeScan;
     }
-    public Evento( Date fechaEvento, Long contadorTotal, Long contadorScan, Long tipoEvento, String detalle,boolean chargeScan) {
+    public Evento( Date fechaEvento, Long contadorTotal, Long contadorScan, boolean tomaContador, String detalle,boolean chargeScan) {
         this.fechaEvento = fechaEvento;
         this.contadorTotal = contadorTotal;
         this.contadorScan=contadorScan;
-        this.tipoEvento = tipoEvento;
+        this.tomaContador = tomaContador;
         this.detalle = detalle;
         this.chargeScan=chargeScan;
     }
 
     public Evento(DatosRegistroEvento datosRegistroEvento) {
-        //this.id = id;
         this.equipo = datosRegistroEvento.equipo();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -60,10 +59,9 @@ public class Evento {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        //this.fechaEvento = datosRegistroEvento.fechaEvento();
         this.contadorTotal = datosRegistroEvento.contadorTotal();
         this.contadorScan=datosRegistroEvento.contadorScan();
-        this.tipoEvento = datosRegistroEvento.tipoEvento();
+        //this.tomaContador = datosRegistroEvento.tomaContador(); Lo elimino mientras pruebo dejar fijo true para toma contador
         this.detalle = datosRegistroEvento.detalle();
         this.chargeScan=datosRegistroEvento.chargeScan();
     }
@@ -108,13 +106,7 @@ public class Evento {
         this.contadorScan = contadorScan;
     }
 
-    public Long getTipoEvento() {
-        return tipoEvento;
-    }
 
-    public void setTipoEvento(Long tipoEvento) {
-        this.tipoEvento = tipoEvento;
-    }
 
     public String getDetalle() {
         return detalle;
@@ -130,5 +122,13 @@ public class Evento {
 
     public void setChargeScan(boolean chargeScan) {
         this.chargeScan = chargeScan;
+    }
+
+    public boolean isTomaContador() {
+        return tomaContador;
+    }
+
+    public void setTomaContador(boolean tomaContador) {
+        this.tomaContador = tomaContador;
     }
 }
